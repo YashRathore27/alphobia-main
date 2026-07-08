@@ -26,16 +26,16 @@ export default function InsightDetail({ id }) {
         {/* Back Button */}
         <button 
           onClick={goBack}
-          className="flex items-center gap-2 text-sm font-semibold text-secondary hover:text-primary transition-colors"
+          className="flex items-center gap-2 font-body-md font-semibold text-secondary hover:text-primary transition-colors"
         >
           <ArrowLeft className="w-4 h-4" /> Back to Insights
         </button>
 
         {/* Title */}
         <div className="space-y-4">
-          <span className="px-3 py-1 bg-secondary/10 text-secondary font-bold text-xs uppercase tracking-wider rounded-[2px]">{article.tag}</span>
-          <h1 className="font-display-xl text-3xl sm:text-4xl lg:text-5xl text-primary leading-tight font-extrabold">{article.title}</h1>
-          <div className="flex flex-wrap gap-6 text-sm text-on-surface-variant pt-2 border-y border-outline-variant/30 py-4">
+          <span className="px-3 py-1 bg-secondary/10 text-secondary font-bold font-label-sm uppercase tracking-wider rounded-[2px]">{article.tag}</span>
+          <h1 className="font-display-xl text-primary leading-tight font-extrabold">{article.title}</h1>
+          <div className="flex flex-wrap gap-6 font-body-md text-on-surface-variant pt-2 border-y border-outline-variant/30 py-4">
             <span className="flex items-center gap-2"><User className="w-4 h-4 text-secondary" /> By {article.author}</span>
             <span className="flex items-center gap-2"><Calendar className="w-4 h-4" /> {new Date(article.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</span>
             <span className="flex items-center gap-2"><Clock className="w-4 h-4" /> {article.readTime} min read</span>
@@ -48,12 +48,13 @@ export default function InsightDetail({ id }) {
             className="w-full h-full object-cover" 
             alt={article.title} 
             src={article.image} 
+            loading="lazy"
           />
         </div>
 
         {/* Content */}
-        <article className="prose max-w-none text-on-surface-variant leading-relaxed text-base space-y-6 font-body-lg">
-          <p className="font-semibold text-primary text-lg">
+        <article className="prose max-w-none text-on-surface-variant leading-relaxed space-y-6 font-body-lg">
+          <p className="font-semibold text-primary font-body-lg">
             {article.excerpt}
           </p>
           <p>
@@ -66,7 +67,7 @@ export default function InsightDetail({ id }) {
 
         {/* CTA */}
         <div className="pt-8 border-t border-outline-variant/30 text-center">
-          <p className="font-bold text-lg mb-4">Want a custom analysis based on these trends?</p>
+          <p className="font-headline-md text-primary mb-4">Want a custom analysis based on these trends?</p>
           <Button onClick={() => navigate("contact")} variant="accent">
             Request Performance Consultation
           </Button>

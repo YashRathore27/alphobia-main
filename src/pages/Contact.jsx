@@ -19,7 +19,7 @@ export default function Contact() {
     <div className="bg-background text-on-surface min-h-screen">
       {/* Header */}
       <section className="pt-32 pb-20 px-6 sm:px-8 max-w-7xl mx-auto text-center space-y-4">
-        <span className="inline-block py-1 px-4 rounded-[2px] bg-secondary/10 text-secondary font-label-sm text-label-sm uppercase tracking-widest">
+        <span className="inline-block py-1 px-4 rounded-[2px] bg-secondary/10 text-secondary font-label-sm uppercase tracking-widest">
           Get in Touch
         </span>
         <h1 className="font-display-xl text-primary leading-tight">
@@ -40,9 +40,9 @@ export default function Contact() {
                 <Mail className="w-5 h-5" />
               </span>
               <div>
-                <p className="text-[10px] font-bold text-outline uppercase tracking-wider">Email us</p>
+                <p className="font-bold text-outline uppercase tracking-wider" style={{fontSize: "10px"}}>Email us</p>
                 <p className="font-bold text-primary">hello@alphobia.com</p>
-                <p className="text-xs text-on-surface-variant">Replies within one business day</p>
+                <p className="font-label-sm text-on-surface-variant">Replies within one business day</p>
               </div>
             </div>
 
@@ -51,9 +51,9 @@ export default function Contact() {
                 <Phone className="w-5 h-5" />
               </span>
               <div>
-                <p className="text-[10px] font-bold text-outline uppercase tracking-wider">Call us</p>
+                <p className="font-bold text-outline uppercase tracking-wider" style={{fontSize: "10px"}}>Call us</p>
                 <p className="font-bold text-primary">+1 (415) 555-0192</p>
-                <p className="text-xs text-on-surface-variant">Mon–Fri, 9am–6pm PT</p>
+                <p className="font-label-sm text-on-surface-variant">Mon–Fri, 9am–6pm PT</p>
               </div>
             </div>
 
@@ -62,9 +62,9 @@ export default function Contact() {
                 <MapPin className="w-5 h-5" />
               </span>
               <div>
-                <p className="text-[10px] font-bold text-outline uppercase tracking-wider">Our HQ</p>
+                <p className="font-bold text-outline uppercase tracking-wider" style={{fontSize: "10px"}}>Our HQ</p>
                 <p className="font-bold text-primary">548 Market St, San Francisco</p>
-                <p className="text-xs text-on-surface-variant">By appointment only</p>
+                <p className="font-label-sm text-on-surface-variant">By appointment only</p>
               </div>
             </div>
 
@@ -74,7 +74,7 @@ export default function Contact() {
               <div className="relative text-center z-10 space-y-2">
                 <MapPin className="w-8 h-8 text-secondary mx-auto" />
                 <p className="font-bold text-primary">San Francisco, CA</p>
-                <p className="text-xs">Precision B2B Hub</p>
+                <p className="font-label-sm">Precision B2B Hub</p>
               </div>
             </div>
           </div>
@@ -86,8 +86,8 @@ export default function Contact() {
                 <div className="w-16 h-16 rounded-[2px] bg-secondary/10 text-secondary flex items-center justify-center mx-auto">
                   <span className="material-symbols-outlined text-4xl">check_circle</span>
                 </div>
-                <h3 className="font-bold text-2xl text-primary">Message Sent Successfully</h3>
-                <p className="text-on-surface-variant text-sm max-w-sm mx-auto leading-relaxed">
+                <h3 className="font-headline-md text-primary">Message Sent Successfully</h3>
+                <p className="text-on-surface-variant font-body-md max-w-sm mx-auto leading-relaxed">
                   Thank you for writing to Alphobia. A certified growth consultant will follow up within 4 hours.
                 </p>
                 <Button onClick={() => setSent(false)} variant="outline" className="mt-4">
@@ -102,48 +102,48 @@ export default function Contact() {
                   if (form.name && form.email) setSent(true);
                 }}
               >
-                <h2 className="font-bold text-2xl text-primary flex items-center gap-2">
+                <h2 className="font-headline-md text-primary flex items-center gap-2">
                   <span className="material-symbols-outlined text-secondary">mail</span> Book Strategy Session
                 </h2>
                 <div className="grid gap-6 sm:grid-cols-2">
                   <div className="space-y-2">
-                    <label className="text-xs font-bold text-primary uppercase tracking-wider">Your Name</label>
+                    <label className="font-label-sm font-bold text-primary uppercase tracking-wider">Your Name</label>
                     <input 
                       required 
                       value={form.name} 
                       onChange={update("name")} 
                       placeholder="Jane Doe" 
-                      className="w-full h-12 rounded-[2px] border border-outline-variant bg-white px-4 text-sm text-on-surface focus:border-secondary focus:ring-2 focus:ring-secondary/10 outline-none"
+                      className="w-full h-12 rounded-[2px] border border-outline-variant bg-white px-4 text-on-surface focus:border-secondary focus:ring-2 focus:ring-secondary/10 outline-none"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-xs font-bold text-primary uppercase tracking-wider">Email Address</label>
+                    <label className="font-label-sm font-bold text-primary uppercase tracking-wider">Email Address</label>
                     <input 
                       required 
                       type="email" 
                       value={form.email} 
                       onChange={update("email")} 
                       placeholder="jane@company.com" 
-                      className="w-full h-12 rounded-[2px] border border-outline-variant bg-white px-4 text-sm text-on-surface focus:border-secondary focus:ring-2 focus:ring-secondary/10 outline-none"
+                      className="w-full h-12 rounded-[2px] border border-outline-variant bg-white px-4 text-on-surface focus:border-secondary focus:ring-2 focus:ring-secondary/10 outline-none"
                     />
                   </div>
                 </div>
                 <div className="grid gap-6 sm:grid-cols-2">
                   <div className="space-y-2">
-                    <label className="text-xs font-bold text-primary uppercase tracking-wider">Company Name</label>
+                    <label className="font-label-sm font-bold text-primary uppercase tracking-wider">Company Name</label>
                     <input 
                       value={form.company} 
                       onChange={update("company")} 
                       placeholder="Company Inc." 
-                      className="w-full h-12 rounded-[2px] border border-outline-variant bg-white px-4 text-sm text-on-surface focus:border-secondary focus:ring-2 focus:ring-secondary/10 outline-none"
+                      className="w-full h-12 rounded-[2px] border border-outline-variant bg-white px-4 text-on-surface focus:border-secondary focus:ring-2 focus:ring-secondary/10 outline-none"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-xs font-bold text-primary uppercase tracking-wider">Request Type</label>
+                    <label className="font-label-sm font-bold text-primary uppercase tracking-wider">Request Type</label>
                     <select 
                       value={form.subject} 
                       onChange={update("subject")} 
-                      className="w-full h-12 rounded-[2px] border border-outline-variant bg-white px-4 text-sm text-on-surface focus:border-secondary outline-none cursor-pointer"
+                      className="w-full h-12 rounded-[2px] border border-outline-variant bg-white px-4 text-on-surface focus:border-secondary outline-none cursor-pointer"
                     >
                       <option>Free Marketing Audit</option>
                       <option>Book a Strategy Call</option>
@@ -153,14 +153,14 @@ export default function Contact() {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-primary uppercase tracking-wider">How can we help?</label>
+                  <label className="font-label-sm font-bold text-primary uppercase tracking-wider">How can we help?</label>
                   <textarea 
                     required 
                     rows={5} 
                     value={form.message} 
                     onChange={update("message")} 
                     placeholder="Briefly describe your business goals and active ad budgets..." 
-                    className="w-full rounded-[2px] border border-outline-variant bg-white p-4 text-sm text-on-surface focus:border-secondary focus:ring-2 focus:ring-secondary/10 outline-none resize-none"
+                      className="w-full rounded-[2px] border border-outline-variant bg-white p-4 text-on-surface focus:border-secondary focus:ring-2 focus:ring-secondary/10 outline-none resize-none"
                   />
                 </div>
                 <button 
@@ -185,11 +185,11 @@ export default function Contact() {
                 className="w-full flex justify-between items-center p-6 text-left hover:bg-surface-container-high transition-colors"
                 onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
               >
-                <span className="font-bold text-lg text-primary">{faq.q}</span>
+                <span className="font-body-lg text-primary">{faq.q}</span>
                 <ChevronDown className={`w-5 h-5 text-on-surface-variant transition-transform duration-300 ${openFaq === idx ? "rotate-180 text-secondary" : ""}`} />
               </button>
               {openFaq === idx && (
-                <div className="p-6 pt-0 text-on-surface-variant border-t border-outline-variant/10 text-sm leading-relaxed">
+                <div className="p-6 pt-0 text-on-surface-variant border-t border-outline-variant/10 font-body-md leading-relaxed">
                   {faq.a}
                 </div>
               )}

@@ -10,7 +10,7 @@ function ShaderHeader({ canvasId }) {
   useEffect(() => {
     if (!canvasRef.current) return;
     const canvas = canvasRef.current;
-    
+
     let animFrameId;
 
     try {
@@ -60,7 +60,7 @@ function ShaderHeader({ canvasId }) {
 
       const buf = gl.createBuffer();
       gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
 
       const pos = gl.getAttribLocation(prog, 'a_position');
       gl.enableVertexAttribArray(pos);
@@ -113,17 +113,18 @@ export default function AdvertisingPrograms() {
       <section className="relative min-h-[500px] flex items-center overflow-hidden pt-28 pb-10">
         {/* Image Background */}
         <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
-          <img 
-            src="/advertisment-marketing-hero-marketing-hero.jpeg" 
-            alt="Advertising Hero Background" 
+          <img
+            src="/advertisment-marketing-hero.png"
+            alt="Advertising Hero Background"
             className="w-full h-full object-cover opacity-90"
           />
-          </div>
+          <div className="hero-image-blur-overlay" />
+        </div>
 
         <div className="px-6 sm:px-8 max-w-7xl mx-auto relative z-10 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <div className="space-y-6">
-              <span className="inline-block px-4 py-1 rounded-[2px] bg-secondary/10 text-secondary font-label-sm text-label-sm mb-2">
+              <span className="inline-block px-4 py-1 rounded-[2px] bg-secondary/10 text-secondary font-label-sm mb-2">
                 GLOBAL ADVERTISING PROGRAMS
               </span>
               <h1 className="font-display-xl text-primary leading-tight">
@@ -144,13 +145,13 @@ export default function AdvertisingPrograms() {
             <Reveal delay={0.2} className="relative flex justify-center lg:justify-end self-end">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 relative z-20 w-full max-w-md">
                 <div className="bg-white/80 backdrop-blur-md p-6 rounded-[2px] border border-outline-variant/30 shadow-lg text-center">
-                  <div className="text-xs text-on-surface-variant mb-1 font-bold uppercase tracking-wider">AD SPEND REACH</div>
-                  <div className="font-bold text-3xl text-secondary">$45M+</div>
+                  <div className="font-label-sm text-on-surface-variant mb-1 font-bold uppercase tracking-wider">AD SPEND REACH</div>
+                  <div className="font-headline-md text-secondary">$45M+</div>
                   <p className="text-[10px] text-on-surface-variant mt-1">Managed Annually</p>
                 </div>
                 <div className="bg-white/80 backdrop-blur-md p-6 rounded-[2px] border border-outline-variant/30 shadow-lg text-center">
-                  <div className="text-xs text-on-surface-variant mb-1 font-bold uppercase tracking-wider">AVERAGE ROAS</div>
-                  <div className="font-bold text-3xl text-primary">5.8x</div>
+                  <div className="font-label-sm text-on-surface-variant mb-1 font-bold uppercase tracking-wider">AVERAGE ROAS</div>
+                  <div className="font-headline-md text-primary">5.8x</div>
                   <p className="text-[10px] text-on-surface-variant mt-1">Blended Client Return</p>
                 </div>
               </div>
@@ -176,10 +177,10 @@ export default function AdvertisingPrograms() {
                 <span className="material-symbols-outlined text-4xl text-secondary">ads_click</span>
                 <h3 className="font-headline-md text-primary">Google Search &amp; Display</h3>
               </div>
-              <p className="text-on-surface-variant text-sm leading-relaxed max-w-md">
+              <p className="text-on-surface-variant font-body-md leading-relaxed max-w-md">
                 Capture high-intent prospects at the exact moment of search. Our proprietary alpha-beta account structures maximize ROI through granular keyword segmentation.
               </p>
-              <ul className="space-y-3 text-xs font-semibold text-on-surface">
+              <ul className="space-y-3 font-label-sm font-semibold text-on-surface">
                 <li className="flex items-center gap-3"><span className="material-symbols-outlined text-secondary text-sm">check_circle</span> Hyper-local intent targeting</li>
                 <li className="flex items-center gap-3"><span className="material-symbols-outlined text-secondary text-sm">check_circle</span> Dynamic search ads (DSA) optimization</li>
                 <li className="flex items-center gap-3"><span className="material-symbols-outlined text-secondary text-sm">check_circle</span> Automated bidding scripts</li>
@@ -196,7 +197,7 @@ export default function AdvertisingPrograms() {
                 <span className="material-symbols-outlined text-4xl text-white">corporate_fare</span>
                 <h3 className="font-headline-md text-white">LinkedIn B2B</h3>
               </div>
-              <p className="text-white/80 text-sm leading-relaxed">
+              <p className="text-white/80 font-body-md leading-relaxed">
                 Precision ABM targeting for C-suite decision-makers and high-value stakeholders.
               </p>
             </div>
@@ -204,7 +205,7 @@ export default function AdvertisingPrograms() {
               <div className="h-1 w-full bg-white/20 rounded-[2px] overflow-hidden">
                 <div className="h-full bg-secondary w-4/5"></div>
               </div>
-              <div className="flex justify-between text-xs text-white/70 font-semibold">
+              <div className="flex justify-between font-label-sm text-white/70 font-semibold">
                 <span>Engagement Rate</span>
                 <span>3.4% High-Tier Avg</span>
               </div>
@@ -218,7 +219,7 @@ export default function AdvertisingPrograms() {
                 <span className="material-symbols-outlined text-4xl text-secondary">hub</span>
                 <h3 className="font-headline-md text-primary">Meta Ecosystem</h3>
               </div>
-              <p className="text-on-surface-variant text-sm leading-relaxed">
+              <p className="text-on-surface-variant font-body-md leading-relaxed">
                 Full-funnel social commerce utilizing Facebook and Instagram's sophisticated interest graphs.
               </p>
               <div className="flex flex-wrap gap-2 pt-2">
@@ -236,7 +237,7 @@ export default function AdvertisingPrograms() {
                 <span className="material-symbols-outlined text-4xl text-secondary">memory</span>
                 <h3 className="font-headline-md text-primary">Programmatic RTB</h3>
               </div>
-              <p className="text-on-surface-variant text-sm leading-relaxed max-w-sm">
+              <p className="text-on-surface-variant font-body-md leading-relaxed max-w-sm">
                 Real-time bidding across premium publishers, connected TV (CTV), and digital out-of-home (DOOH).
               </p>
             </div>
@@ -255,7 +256,7 @@ export default function AdvertisingPrograms() {
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-8">
             <h2 className="font-headline-lg text-white">Unified Performance Intelligence</h2>
-            <p className="text-on-primary-container text-body-lg">
+              <p className="text-on-primary-container font-body-lg">
               Stop oscillating between platforms. Our proprietary dashboard aggregates multi-channel data into a single source of truth for cross-attribution analysis.
             </p>
             <div className="space-y-6">
@@ -265,7 +266,7 @@ export default function AdvertisingPrograms() {
                 </div>
                 <div>
                   <h4 className="text-white font-bold mb-1">Real-Time Attribution</h4>
-                  <p className="text-on-primary-container text-sm">First-touch and last-touch modeling to understand the true impact of every dollar spent.</p>
+                  <p className="text-on-primary-container font-body-md">First-touch and last-touch modeling to understand the true impact of every dollar spent.</p>
                 </div>
               </div>
               <div className="flex gap-4">
@@ -274,7 +275,7 @@ export default function AdvertisingPrograms() {
                 </div>
                 <div>
                   <h4 className="text-white font-bold mb-1">AI-Driven Anomaly Detection</h4>
-                  <p className="text-on-primary-container text-sm">Automated alerts for CPA fluctuations or budget pacing issues across all accounts.</p>
+                  <p className="text-on-primary-container font-body-md">Automated alerts for CPA fluctuations or budget pacing issues across all accounts.</p>
                 </div>
               </div>
             </div>
@@ -321,34 +322,34 @@ export default function AdvertisingPrograms() {
             <h3 className="font-headline-md text-primary">Omnichannel Funnel Architecture</h3>
             <div className="space-y-4">
               <div className="bg-white p-6 rounded-[2px] border border-outline-variant flex justify-between items-center shadow-sm">
-                <span className="font-bold flex items-center gap-3"><span class="material-symbols-outlined text-secondary">visibility</span> Awareness</span>
-                <span className="text-sm font-bold text-on-surface-variant">Top of Funnel (40%)</span>
+                <span className="font-bold flex items-center gap-3">                <span className="material-symbols-outlined text-secondary">visibility</span> Awareness</span>
+                <span className="font-body-md font-bold text-on-surface-variant">Top of Funnel (40%)</span>
               </div>
               <div className="flex justify-center py-2 text-outline-variant">
                 <span className="material-symbols-outlined">expand_more</span>
               </div>
               <div className="bg-white p-6 rounded-[2px] border border-outline-variant flex justify-between items-center shadow-sm ml-8">
-                <span className="font-bold flex items-center gap-3"><span class="material-symbols-outlined text-secondary">psychology_alt</span> Consideration</span>
-                <span className="text-sm font-bold text-on-surface-variant">Middle of Funnel (35%)</span>
+                <span className="font-bold flex items-center gap-3">                <span className="material-symbols-outlined text-secondary">psychology_alt</span> Consideration</span>
+                <span className="font-body-md font-bold text-on-surface-variant">Middle of Funnel (35%)</span>
               </div>
               <div className="flex justify-center py-2 ml-8 text-outline-variant">
                 <span className="material-symbols-outlined">expand_more</span>
               </div>
               <div className="bg-secondary text-on-secondary p-6 rounded-[2px] flex justify-between items-center shadow-lg ml-16">
-                <span className="font-bold flex items-center gap-3"><span class="material-symbols-outlined">shopping_cart_checkout</span> Conversion</span>
-                <span className="text-sm font-bold">Bottom of Funnel (25%)</span>
+                <span className="font-bold flex items-center gap-3">                <span className="material-symbols-outlined">shopping_cart_checkout</span> Conversion</span>
+                <span className="font-body-md font-bold">Bottom of Funnel (25%)</span>
               </div>
             </div>
           </div>
 
           <div className="p-12 space-y-8">
             <h3 className="font-headline-md text-primary">Strategic Budget Allocation</h3>
-            <p className="text-on-surface-variant text-sm leading-relaxed">
+            <p className="text-on-surface-variant font-body-md leading-relaxed">
               We distribute resources based on a dynamic 70-20-10 model: 70% proven performance, 20% expansion, and 10% experimental high-alpha channels.
             </p>
             <div className="space-y-6">
               <div className="space-y-2">
-                <div className="flex justify-between text-xs font-bold">
+                <div className="flex justify-between font-label-sm font-bold">
                   <span>Google Ads (Search)</span>
                   <span>45%</span>
                 </div>
@@ -357,7 +358,7 @@ export default function AdvertisingPrograms() {
                 </div>
               </div>
               <div className="space-y-2">
-                <div className="flex justify-between text-xs font-bold">
+                <div className="flex justify-between font-label-sm font-bold">
                   <span>LinkedIn (B2B Lead Gen)</span>
                   <span>30%</span>
                 </div>
@@ -366,7 +367,7 @@ export default function AdvertisingPrograms() {
                 </div>
               </div>
               <div className="space-y-2">
-                <div className="flex justify-between text-xs font-bold">
+                <div className="flex justify-between font-label-sm font-bold">
                   <span>Programmatic Display</span>
                   <span>15%</span>
                 </div>
@@ -375,7 +376,7 @@ export default function AdvertisingPrograms() {
                 </div>
               </div>
               <div className="space-y-2">
-                <div className="flex justify-between text-xs font-bold">
+                <div className="flex justify-between font-label-sm font-bold">
                   <span>R&amp;D / Emerging Platforms</span>
                   <span>10%</span>
                 </div>
@@ -394,23 +395,23 @@ export default function AdvertisingPrograms() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="space-y-4">
               <div className="text-secondary font-display-xl text-[80px] font-extrabold opacity-20 leading-none">01</div>
-              <h4 className="font-bold text-xl text-primary">Audit &amp; Architect</h4>
-              <p className="text-on-surface-variant text-xs leading-relaxed">Comprehensive tracking audit and structural redesign to ensure every conversion is captured accurately.</p>
+              <h4 className="font-headline-md text-primary">Audit &amp; Architect</h4>
+              <p className="text-on-surface-variant font-body-md leading-relaxed">Comprehensive tracking audit and structural redesign to ensure every conversion is captured accurately.</p>
             </div>
             <div className="space-y-4">
               <div className="text-secondary font-display-xl text-[80px] font-extrabold opacity-20 leading-none">02</div>
-              <h4 className="font-bold text-xl text-primary">Creative Testing</h4>
-              <p className="text-on-surface-variant text-xs leading-relaxed">A/B and multivariate testing of visual assets to identify high-converting hooks and imagery.</p>
+              <h4 className="font-headline-md text-primary">Creative Testing</h4>
+              <p className="text-on-surface-variant font-body-md leading-relaxed">A/B and multivariate testing of visual assets to identify high-converting hooks and imagery.</p>
             </div>
             <div className="space-y-4">
               <div className="text-secondary font-display-xl text-[80px] font-extrabold opacity-20 leading-none">03</div>
-              <h4 className="font-bold text-xl text-primary">Bidding Logic</h4>
-              <p className="text-on-surface-variant text-xs leading-relaxed">Implementation of advanced scripts and portfolio bidding strategies to out-compete the market.</p>
+              <h4 className="font-headline-md text-primary">Bidding Logic</h4>
+              <p className="text-on-surface-variant font-body-md leading-relaxed">Implementation of advanced scripts and portfolio bidding strategies to out-compete the market.</p>
             </div>
             <div className="space-y-4">
               <div className="text-secondary font-display-xl text-[80px] font-extrabold opacity-20 leading-none">04</div>
-              <h4 className="font-bold text-xl text-primary">Scale &amp; Refine</h4>
-              <p className="text-on-surface-variant text-xs leading-relaxed">Incremental budget scaling based on real-time ROAS benchmarks and secondary metric signals.</p>
+              <h4 className="font-headline-md text-primary">Scale &amp; Refine</h4>
+              <p className="text-on-surface-variant font-body-md leading-relaxed">Incremental budget scaling based on real-time ROAS benchmarks and secondary metric signals.</p>
             </div>
           </div>
         </div>
@@ -419,15 +420,16 @@ export default function AdvertisingPrograms() {
       {/* Visual Content Section */}
       <section className="py-24 px-6 sm:px-8 max-w-7xl mx-auto">
         <div className="relative rounded-[2px] overflow-hidden border border-outline-variant shadow-2xl h-[450px]">
-          <img 
-            className="w-full h-full object-cover" 
-            alt="Enterprise grade transparency dashboard" 
-            src="https://images.pexels.com/photos/8636589/pexels-photo-8636589.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=1000" 
+          <img
+            className="w-full h-full object-cover"
+            alt="Enterprise grade transparency dashboard"
+            src="https://images.pexels.com/photos/8636589/pexels-photo-8636589.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=1000"
+            loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-12">
             <div className="max-w-xl space-y-3">
-              <h3 className="text-white font-bold text-3xl">Enterprise Grade Transparency</h3>
-              <p className="text-white/70 text-sm leading-relaxed">Access the same high-resolution data points our analysts use. No hidden fees, no obscured metrics—just raw performance power.</p>
+              <h3 className="text-white font-headline-md">Enterprise Grade Transparency</h3>
+              <p className="text-white/70 font-body-md leading-relaxed">Access the same high-resolution data points our analysts use. No hidden fees, no obscured metrics—just raw performance power.</p>
             </div>
           </div>
         </div>
@@ -438,14 +440,14 @@ export default function AdvertisingPrograms() {
         <div className="absolute top-0 right-0 w-96 h-96 bg-secondary/15 blur-[100px] rounded-full" />
         <div className="max-w-7xl mx-auto text-center space-y-6 relative z-10">
           <h2 className="font-headline-lg text-white">Ready to Scale Your Program?</h2>
-          <p className="max-w-2xl mx-auto text-white/80 leading-relaxed text-sm">
+          <p className="max-w-2xl mx-auto text-white/80 font-body-lg leading-relaxed">
             Let's audit your current ad accounts and identify the immediate efficiency gains that could be driving your bottom line today.
           </p>
           <div className="flex justify-center gap-4 pt-4">
             <Button onClick={() => go("contact")} variant="secondary" size="lg" className="bg-white text-secondary hover:bg-white/90">
               Book Audit Call
             </Button>
-            <Button 
+            <Button
               onClick={() => go("insights")}
               variant="outline"
               size="lg"

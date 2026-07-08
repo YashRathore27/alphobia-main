@@ -177,14 +177,15 @@ export default function Home() {
             alt="Hero Background" 
             className="w-full h-full object-cover opacity-90"
           />
-          </div>
+          <div className="hero-image-blur-overlay" />
+        </div>
 
         <section className="relative min-h-[800px] flex items-center px-6 sm:px-8 max-w-7xl mx-auto py-20 z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full">
             {/* Left Hero Text */}
             <div className="space-y-8 max-w-2xl">
               <Reveal>
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-[2px] bg-surface-container text-secondary font-label-sm text-label-sm uppercase tracking-widest">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-[2px] bg-surface-container text-secondary font-label-sm uppercase tracking-widest">
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span>
@@ -218,8 +219,8 @@ export default function Home() {
 
               <Reveal delay={0.4}>
                 <div className="pt-8 flex items-center gap-8 grayscale">
-                  <span className="font-label-sm uppercase text-xs tracking-tighter">Verified by</span>
-                  <div className="flex gap-6 font-bold text-lg">
+                  <span className="font-label-sm uppercase tracking-tighter">Verified by</span>
+                  <div className="flex gap-6 font-bold font-body-lg">
                     <span>Google Premier</span>
                     <span>HubSpot Elite</span>
                     <span>Meta Business</span>
@@ -239,12 +240,12 @@ export default function Home() {
       {/* Trusted By logo cloud */}
       <section className="py-10 z-10 relative overflow-hidden" aria-label="Trusted companies">
         <Container>
-          <p className="mb-7 text-center text-xs font-semibold uppercase tracking-[0.2em] text-outline">{`Pioneering the future with global industry leaders`}</p>
+          <p className="mb-7 text-center font-label-sm uppercase tracking-[0.2em] text-outline">{`Pioneering the future with global industry leaders`}</p>
         </Container>
         <div className="relative overflow-hidden" style={{ maskImage: "linear-gradient(90deg, transparent, black 12%, black 88%, transparent)", WebkitMaskImage: "linear-gradient(90deg, transparent, black 12%, black 88%, transparent)" }}>
           <div className="flex w-max animate-marquee items-center gap-14 px-7 opacity-60 font-bold tracking-tighter">
             {[...COMPANIES, ...COMPANIES].map((c, i) => (
-              <span key={`${c.id}-${i}`} className="flex items-center gap-3 text-lg font-bold text-slate-700 hover:text-slate-950 transition-colors cursor-pointer">
+              <span key={`${c.id}-${i}`} className="flex items-center gap-3 font-body-lg font-bold text-slate-700 hover:text-slate-950 transition-colors cursor-pointer">
                 <CompanyLogo name={c.name} domain={c.domain} />
                 {c.name}
               </span>
@@ -257,7 +258,7 @@ export default function Home() {
       <section className="py-24 px-6 sm:px-8 max-w-7xl mx-auto z-10 relative">
         <div className="mb-16 space-y-4">
           <h2 className="font-headline-lg text-primary">Core Capabilities</h2>
-          <p className="text-body-lg text-on-surface-variant max-w-2xl">
+          <p className="text-on-surface-variant max-w-2xl">
             From foundational SEO to high-frequency programmatic advertising, we provide the full spectrum of digital velocity.
           </p>
         </div>
@@ -269,7 +270,7 @@ export default function Home() {
             <div className="relative z-10 space-y-6">
               <span className="material-symbols-outlined text-5xl text-white">insights</span>
               <h3 className="font-headline-md text-white">Digital Marketing Architecture</h3>
-              <p className="text-white/70 text-sm leading-relaxed max-w-md">
+              <p className="text-white/70 font-body-md leading-relaxed max-w-md">
                 Comprehensive omnichannel strategies that align brand identity with aggressive performance metrics.
               </p>
             </div>
@@ -287,8 +288,8 @@ export default function Home() {
           <div className="md:col-span-2 bg-white border border-outline-variant p-8 rounded-[2px] flex items-center justify-between group hover:border-secondary transition-all">
             <div className="space-y-3">
               <span className="material-symbols-outlined text-secondary text-4xl">account_tree</span>
-              <h3 className="font-headline-md text-2xl text-primary">Affiliate Marketing</h3>
-              <p className="text-on-surface-variant text-sm max-w-xs leading-relaxed">
+              <h3 className="font-headline-md text-primary">Affiliate Marketing</h3>
+              <p className="text-on-surface-variant font-body-md max-w-xs leading-relaxed">
                 Global partnership networks built for sustainable, performance-based conversion growth.
               </p>
             </div>
@@ -301,8 +302,8 @@ export default function Home() {
           <div className="md:col-span-2 bg-white border border-outline-variant p-8 rounded-[2px] flex items-center justify-between group hover:border-secondary transition-all">
             <div className="space-y-3">
               <span className="material-symbols-outlined text-secondary text-4xl">campaign</span>
-              <h3 className="font-headline-md text-2xl text-primary">Advertising Programs</h3>
-              <p className="text-on-surface-variant text-sm max-w-xs leading-relaxed">
+              <h3 className="font-headline-md text-primary">Advertising Programs</h3>
+              <p className="text-on-surface-variant font-body-md max-w-xs leading-relaxed">
                 Precision-targeted campaigns across programmatic, social, and search ecosystems.
               </p>
             </div>
@@ -314,23 +315,23 @@ export default function Home() {
           {/* Small Cards */}
           <div className="bg-white border border-outline-variant p-8 rounded-[2px] hover:-translate-y-1 hover:border-secondary transition-all">
             <span className="material-symbols-outlined text-secondary text-3xl mb-4">search</span>
-            <h4 className="font-bold text-lg mb-1">SEO</h4>
-            <p className="text-sm text-on-surface-variant">Organic domination.</p>
+            <h4 className="font-headline-md text-primary">SEO</h4>
+            <p className="font-body-md text-on-surface-variant">Organic domination.</p>
           </div>
           <div className="bg-white border border-outline-variant p-8 rounded-[2px] hover:-translate-y-1 hover:border-secondary transition-all">
             <span className="material-symbols-outlined text-secondary text-3xl mb-4">monitoring</span>
-            <h4 className="font-bold text-lg mb-1">Analytics</h4>
-            <p className="text-sm text-on-surface-variant">Real-time intelligence.</p>
+            <h4 className="font-headline-md text-primary">Analytics</h4>
+            <p className="font-body-md text-on-surface-variant">Real-time intelligence.</p>
           </div>
           <div className="bg-white border border-outline-variant p-8 rounded-[2px] hover:-translate-y-1 hover:border-secondary transition-all">
             <span className="material-symbols-outlined text-secondary text-3xl mb-4">mail</span>
-            <h4 className="font-bold text-lg mb-1">Email</h4>
-            <p className="text-sm text-on-surface-variant">Retention automation.</p>
+            <h4 className="font-headline-md text-primary">Email</h4>
+            <p className="font-body-md text-on-surface-variant">Retention automation.</p>
           </div>
           <div className="bg-white border border-outline-variant p-8 rounded-[2px] hover:-translate-y-1 hover:border-secondary transition-all">
             <span className="material-symbols-outlined text-secondary text-3xl mb-4">rocket_launch</span>
-            <h4 className="font-bold text-lg mb-1">Automation</h4>
-            <p className="text-sm text-on-surface-variant">Scalable workflows.</p>
+            <h4 className="font-headline-md text-primary">Automation</h4>
+            <p className="font-body-md text-on-surface-variant">Scalable workflows.</p>
           </div>
         </div>
       </section>
@@ -340,7 +341,7 @@ export default function Home() {
         <div className="px-6 sm:px-8 max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-20 max-w-3xl mx-auto space-y-4">
             <h2 className="font-headline-lg text-white">Our Execution Protocol</h2>
-            <p className="text-white/60 text-lg leading-relaxed">
+            <p className="text-white/60 font-body-lg leading-relaxed">
               A five-stage lifecycle designed for aggressive market capture and sustained ROI.
             </p>
           </div>
@@ -363,7 +364,7 @@ export default function Home() {
             ].map((step, idx) => (
               <div key={step.num} className="space-y-4 flex flex-col items-center text-center">
                 <div 
-                  className={`w-20 h-20 rounded-full flex items-center justify-center font-bold text-2xl text-white backdrop-blur transition-all duration-500 cursor-pointer ${
+                  className={`w-20 h-20 rounded-full flex items-center justify-center font-bold text-white backdrop-blur transition-all duration-500 cursor-pointer ${
                     idx <= activeStep 
                       ? "bg-secondary/20 border-2 border-secondary shadow-[0_0_15px_rgba(37,99,235,0.4)]" 
                       : "bg-white/10 border border-white/20"
@@ -372,10 +373,10 @@ export default function Home() {
                 >
                   {step.num}
                 </div>
-                <h4 className={`font-bold text-lg transition-colors duration-500 ${idx <= activeStep ? "text-secondary" : "text-white"}`}>
+                <h4 className={`font-headline-md transition-colors duration-500 ${idx <= activeStep ? "text-secondary" : "text-white"}`}>
                   {step.name}
                 </h4>
-                <p className="text-white/50 text-xs leading-relaxed">
+                <p className="text-white/50 font-body-md leading-relaxed">
                   {step.desc}
                 </p>
               </div>
@@ -388,31 +389,31 @@ export default function Home() {
       <section className="py-20 px-6 sm:px-8 max-w-7xl mx-auto z-10 relative">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="glass-card p-12 rounded-[2px] text-center space-y-4 hover:shadow-2xl transition-all duration-500 group hover:border-secondary">
-            <p className="text-secondary font-display-xl text-5xl group-hover:scale-105 transition-transform">
+              <p className="text-secondary font-display-xl group-hover:scale-105 transition-transform">
               <CountUpStat value={500} suffix="M+" />
             </p>
-            <p className="font-bold text-xl text-primary">Global Impressions</p>
-            <p className="text-on-surface-variant text-sm leading-relaxed">
+            <p className="font-headline-md text-primary">Global Impressions</p>
+            <p className="text-on-surface-variant font-body-md leading-relaxed">
               Delivered annually across high-intent B2B audience segments.
             </p>
           </div>
 
           <div className="glass-card p-12 rounded-[2px] text-center space-y-4 hover:shadow-2xl transition-all duration-500 group hover:border-secondary">
-            <p className="text-secondary font-display-xl text-5xl group-hover:scale-105 transition-transform">
+              <p className="text-secondary font-display-xl group-hover:scale-105 transition-transform">
               <CountUpStat value={50} prefix="$" suffix="M+" />
             </p>
-            <p className="font-bold text-xl text-primary">Managed Ad Spend</p>
-            <p className="text-on-surface-variant text-sm leading-relaxed">
+            <p className="font-headline-md text-primary">Managed Ad Spend</p>
+            <p className="text-on-surface-variant font-body-md leading-relaxed">
               Optimized with machine learning protocols for maximum efficiency.
             </p>
           </div>
 
           <div className="glass-card p-12 rounded-[2px] text-center space-y-4 hover:shadow-2xl transition-all duration-500 group hover:border-secondary">
-            <p className="text-secondary font-display-xl text-5xl group-hover:scale-105 transition-transform">
+              <p className="text-secondary font-display-xl group-hover:scale-105 transition-transform">
               <CountUpStat value={300} suffix="%" />
             </p>
-            <p className="font-bold text-xl text-primary">Avg Client ROI</p>
-            <p className="text-on-surface-variant text-sm leading-relaxed">
+            <p className="font-headline-md text-primary">Avg Client ROI</p>
+            <p className="text-on-surface-variant font-body-md leading-relaxed">
               Documented growth across our top-tier enterprise accounts.
             </p>
           </div>
@@ -428,6 +429,7 @@ export default function Home() {
               className="w-full h-full object-cover rounded-[2px]" 
               alt="Corporate office with analytics charts" 
               src="https://images.pexels.com/photos/7621381/pexels-photo-7621381.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=600&w=600" 
+              loading="lazy"
             />
           </div>
           <div className="space-y-6">
@@ -455,6 +457,7 @@ export default function Home() {
               className="w-full h-full object-cover rounded-[2px]" 
               alt="Digital interface network nodes" 
               src="https://images.pexels.com/photos/34804001/pexels-photo-34804001.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=600&w=600" 
+              loading="lazy"
             />
           </div>
           <div className="lg:order-1 space-y-6">

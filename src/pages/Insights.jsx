@@ -18,7 +18,7 @@ export default function Insights() {
   return (
     <div className="bg-background text-on-surface min-h-screen">
       <section className="pt-32 pb-20 px-6 sm:px-8 max-w-7xl mx-auto text-center space-y-4">
-        <span className="inline-block py-1 px-4 rounded-[2px] bg-secondary/10 text-secondary font-label-sm text-label-sm uppercase tracking-widest">
+        <span className="inline-block py-1 px-4 rounded-[2px] bg-secondary/10 text-secondary font-label-sm uppercase tracking-widest">
           Knowledge Base
         </span>
         <h1 className="font-display-xl text-primary leading-tight">
@@ -42,18 +42,19 @@ export default function Insights() {
                     className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500" 
                     alt={article.title} 
                     src={article.image} 
+                    loading="lazy"
                   />
                 </div>
                 <div className="p-8 space-y-4 flex-1 flex flex-col justify-between">
                   <div className="space-y-3">
-                    <div className="flex gap-4 text-xs text-on-surface-variant font-semibold">
+                    <div className="flex gap-4 font-label-sm text-on-surface-variant font-semibold">
                       <span className="flex items-center gap-1"><Calendar className="w-3.5 h-3.5" /> {new Date(article.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</span>
                       <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> {article.readTime} min read</span>
                     </div>
-                    <h3 className="font-bold text-2xl text-primary group-hover:text-secondary transition-colors line-clamp-2">{article.title}</h3>
-                    <p className="text-on-surface-variant text-sm leading-relaxed line-clamp-3">{article.excerpt}</p>
+                    <h3 className="font-headline-md text-primary group-hover:text-secondary transition-colors line-clamp-2">{article.title}</h3>
+                    <p className="text-on-surface-variant font-body-md leading-relaxed line-clamp-3">{article.excerpt}</p>
                   </div>
-                  <div className="pt-4 border-t border-outline-variant/30 flex justify-between items-center text-xs font-semibold">
+                  <div className="pt-4 border-t border-outline-variant/30 flex justify-between items-center font-label-sm font-semibold">
                     <span className="flex items-center gap-2 text-primary">
                       <User className="w-4.5 h-4.5 text-secondary" /> {article.author}
                     </span>
@@ -78,7 +79,7 @@ export default function Insights() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="sticky top-0 bg-white border-b border-outline-variant/30 flex items-center justify-between px-8 py-4 z-10">
-              <span className="px-3 py-1 bg-secondary/10 text-secondary font-bold text-xs uppercase tracking-wider rounded-[2px]">{selectedArticle.tag}</span>
+              <span className="px-3 py-1 bg-secondary/10 text-secondary font-bold font-label-sm uppercase tracking-wider rounded-[2px]">{selectedArticle.tag}</span>
               <button 
                 onClick={() => setSelectedArticle(null)}
                 className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-slate-100 transition-colors"
@@ -88,7 +89,7 @@ export default function Insights() {
             </div>
 
             <div className="px-8 py-6 space-y-6">
-              <h2 className="font-display-xl text-2xl sm:text-3xl text-primary leading-tight font-extrabold">{selectedArticle.title}</h2>
+              <h2 className="font-display-xl text-primary leading-tight font-extrabold">{selectedArticle.title}</h2>
 
               <div className="flex flex-wrap gap-6 text-sm text-on-surface-variant border-y border-outline-variant/30 py-4">
                 <span className="flex items-center gap-2"><User className="w-4 h-4 text-secondary" /> By {selectedArticle.author}</span>
@@ -100,8 +101,8 @@ export default function Insights() {
                 <img className="w-full h-full object-cover" alt={selectedArticle.title} src={selectedArticle.image} />
               </div>
 
-              <article className="text-on-surface-variant leading-relaxed text-base space-y-6">
-                <p className="font-semibold text-primary text-lg">{selectedArticle.excerpt}</p>
+              <article className="text-on-surface-variant font-body-md leading-relaxed space-y-6">
+                <p className="font-body-lg text-primary">{selectedArticle.excerpt}</p>
                 <p>{selectedArticle.content}</p>
               </article>
             </div>

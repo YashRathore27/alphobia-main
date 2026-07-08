@@ -13,7 +13,7 @@ export default function Industries() {
   return (
     <div className="bg-background text-on-surface min-h-screen">
       <section className="pt-32 pb-20 px-6 sm:px-8 max-w-7xl mx-auto text-center space-y-4">
-        <span className="inline-block py-1 px-4 rounded-[2px] bg-secondary/10 text-secondary font-label-sm text-label-sm uppercase tracking-widest">
+        <span className="inline-block py-1 px-4 rounded-[2px] bg-secondary/10 text-secondary font-label-sm uppercase tracking-widest">
           Sectors We Scale
         </span>
         <h1 className="font-display-xl text-primary leading-tight">
@@ -35,9 +35,9 @@ export default function Industries() {
                     <Icon className="w-6 h-6" />
                   </span>
                   <div className="space-y-3">
-                    <h3 className="font-bold text-2xl text-primary">{ind.name}</h3>
-                    <p className="text-on-surface-variant text-sm leading-relaxed">{ind.description}</p>
-                    <ul className="grid grid-cols-2 gap-2 text-xs font-semibold text-secondary pt-2">
+                    <h3 className="font-headline-md text-primary">{ind.name}</h3>
+                    <p className="text-on-surface-variant font-body-md leading-relaxed">{ind.description}</p>
+                    <ul className="grid grid-cols-2 gap-2 font-label-sm font-semibold text-secondary pt-2">
                       <li className="flex items-center gap-1.5"><span className="material-symbols-outlined text-[14px]">check</span> Compliance Vetted</li>
                       <li className="flex items-center gap-1.5"><span className="material-symbols-outlined text-[14px]">check</span> Target Personas</li>
                       <li className="flex items-center gap-1.5"><span className="material-symbols-outlined text-[14px]">check</span> Custom Funnel</li>
