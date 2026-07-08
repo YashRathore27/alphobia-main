@@ -1,115 +1,106 @@
-import { Target, Eye, HeartHandshake, ArrowRight } from "lucide-react";
-import PageHero from "../components/common/PageHero";
-import { Container, SectionHeading, Button, CountUpStat, Reveal, Avatar } from "../components/ui";
-import { TrustedCompanies, TestimonialsSection, NewsletterCTA } from "../components/sections";
-import { stats } from "../data";
+import { Container, Reveal } from "../components/ui";
+
+const values = [
+  { title: "Our Mission", text: "Empower global enterprise brands to capture the future of their markets through precision B2B performance marketing and unified data attribution." },
+  { title: "Our Vision", text: "To define the definitive standard in global B2B digital transformation, providing complete metrics transparency and high-stakes growth engineering." },
+  { title: "Our Promise", text: "We never guess, we model. We distribute resources based on proven metrics and absolute client transparency, aligning incentives for win-win results." }
+];
 
 const timeline = [
-  { year: "2019", title: "A spreadsheet of deals", text: "Alphobia starts as a shared spreadsheet of verified deals between three friends in a San Francisco apartment." },
-  { year: "2020", title: "The review lab opens", text: "First dedicated testing lab. We buy every product we review — no free samples, no strings." },
-  { year: "2021", title: "1M monthly readers", text: "The Thursday newsletter crosses 100K subscribers and the site passes a million monthly readers." },
-  { year: "2022", title: "The agency is born", text: "Brands kept asking how we grew. We started doing it for them — Alphobia Growth Services launches." },
-  { year: "2024", title: "$10M saved for readers", text: "Cumulative verified reader savings cross eight figures. The deal engine tracks 40,000+ prices daily." },
-  { year: "2026", title: "2.4M and counting", text: "640+ brand partners, 380+ growth engagements and a team of 48 across 11 countries." },
+  { year: "2019", title: "Founding in London", text: "Alphobia begins as a small boutique consultancy of three growth engineers specializing in programmatic marketing." },
+  { year: "2021", title: "Attribution Dashboard Launch", text: "We release our custom performance attribution framework, aggregating multi-channel insights for client-side scaling." },
+  { year: "2024", title: "Global Expansion", text: "Opening tactical offices in New York and Singapore to support B2B clients across four continents, surpassing $50M managed ad spend." },
+  { year: "2026", title: "Kinetic Network Integration", text: "Expanding publisher networks to 12.4k+ verified partners and setting industry-leading benchmarks for B2B ROAS." }
 ];
 
 const team = [
-  { name: "Ava Lindqvist", role: "Co-founder & CEO", color: "#7C3AED", bio: "Ex-growth at two unicorns. Still answers reader emails on Fridays." },
-  { name: "Marcus Chen", role: "Co-founder & CTO", color: "#EC4899", bio: "Built the deal engine that tracks 40K+ prices a day." },
-  { name: "Maya Collins", role: "Head of Editorial", color: "#8B5CF6", bio: "15 years in consumer journalism. Guards the review firewall." },
-  { name: "Devon Reyes", role: "Head of Testing Lab", color: "#F59E0B", bio: "Has personally broken 200+ products so you don't have to." },
-  { name: "Priya Sharma", role: "VP, Growth Services", color: "#22C55E", bio: "Leads the agency team behind 5.8x average client ROAS." },
-  { name: "Sofia Marin", role: "Head of Partnerships", color: "#EC4899", bio: "Keeps 640+ brand relationships honest and win-win." },
-  { name: "Ethan Brooks", role: "Design Director", color: "#0EA5E9", bio: "Believes premium design is a trust signal, not decoration." },
-  { name: "Hana Sato", role: "AI Tools Editor", color: "#F97316", bio: "Tests every AI tool the day it launches. Sleep optional." },
-];
-
-const values = [
-  { icon: Target, title: "Our mission", text: "Make every purchase and every marketing dollar demonstrably smarter — with verified data, honest testing and zero dark patterns." },
-  { icon: Eye, title: "Our vision", text: "A web where discovery platforms are trusted by default: transparent about money, ruthless about accuracy, delightful to use." },
-  { icon: HeartHandshake, title: "Our promise", text: "Commissions never touch verdicts. If a partnership ever conflicts with a reader's interest, the reader wins. Every time." },
+  { name: "Ava Lindqvist", role: "Co-founder & CEO", bio: "Ex-growth executive at two B2B tech unicorns. Oversees global consultancy operations from London." },
+  { name: "Marcus Chen", role: "Co-founder & CTO", bio: "Attribution architecture lead. Built our unified performance analytics engine." },
+  { name: "Priya Sharma", role: "VP, Growth Services", bio: "Tactical operations lead for Paid Media & SEO. 12+ years of enterprise scaling experience." }
 ];
 
 export default function About() {
   return (
-    <>
-      <PageHero
-        eyebrow="About Alphobia" crumbs={[{ label: "About" }]}
-        title="We're the trust layer for smarter buying"
-        subtitle="Since 2019, Alphobia has combined a rigorous review lab, a deal-verification engine and a performance marketing team — all built on one principle: the reader wins."
-      >
-        <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
-          {stats.headline.map((s) => (
-            <div key={s.label} className="card-base p-5">
-              <p className="text-2xl font-extrabold text-slate-900 dark:text-white">
-                <CountUpStat value={s.value} prefix={s.prefix || ""} suffix={s.suffix || ""} decimals={s.decimals || 0} />
-              </p>
-              <p className="mt-1 text-xs font-medium text-slate-400">{s.label}</p>
-            </div>
-          ))}
-        </div>
-      </PageHero>
-
-      <Container className="py-24">
-        <div className="grid gap-6 md:grid-cols-3">
-          {values.map((v, i) => (
-            <Reveal key={v.title} delay={i * 0.1}>
-              <div className="card-base card-hover h-full p-8">
-                <span className="mb-5 flex h-13 w-13 items-center justify-center rounded-2xl bg-indigo-600 p-3.5 text-white shadow-lg shadow-primary/25"><v.icon size={22} /></span>
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white">{v.title}</h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-slate-500 dark:text-slate-400">{v.text}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </Container>
-
-      <section className="bg-white py-24 dark:bg-white/[0.02]">
-        <Container>
-          <SectionHeading eyebrow="The Story" title="From spreadsheet to platform" />
-          <div className="relative mx-auto max-w-3xl">
-            <div className="absolute bottom-4 left-5 top-4 w-px bg-gradient-to-b from-primary via-accent to-transparent sm:left-1/2" aria-hidden />
-            <div className="space-y-10">
-              {timeline.map((t, i) => (
-                <Reveal key={t.year} delay={i * 0.05} className={`relative flex gap-6 sm:w-1/2 ${i % 2 ? "sm:ml-auto sm:pl-10" : "sm:flex-row-reverse sm:pr-10 sm:text-right"} pl-14 sm:pl-0`}>
-                  <span className={`absolute left-0 top-1 flex h-10 w-10 items-center justify-center rounded-full bg-white text-[11px] font-extrabold text-primary ring-2 ring-primary/20 dark:bg-slate-800 sm:top-0 ${i % 2 ? "sm:-left-5" : "sm:-right-5 sm:left-auto"}`}>
-                    {t.year.slice(2)}
-                  </span>
-                  <div className="card-base card-hover w-full p-6">
-                    <p className="text-xs font-bold uppercase tracking-widest text-primary">{t.year}</p>
-                    <h3 className="mt-1 font-bold text-slate-900 dark:text-white">{t.title}</h3>
-                    <p className="mt-1.5 text-sm leading-relaxed text-slate-500 dark:text-slate-400">{t.text}</p>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </Container>
+    <div className="bg-background text-on-surface min-h-screen">
+      {/* Page Header */}
+      <section className="pt-32 pb-20 px-6 sm:px-8 max-w-7xl mx-auto text-center space-y-4">
+        <span className="inline-block py-1 px-4 rounded-[2px] bg-secondary/10 text-secondary font-label-sm text-label-sm uppercase tracking-widest">
+          Who We Are
+        </span>
+        <h1 className="font-display-xl text-primary leading-tight">
+          We're the Trust Layer for <br/><span className="text-secondary">Smarter B2B Growth</span>
+        </h1>
+        <p className="font-body-lg text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
+          Combining analytical precision with digital agility to deploy high-performance marketing ecosystems that compound value month over month.
+        </p>
       </section>
 
-      <Container className="py-24">
-        <SectionHeading eyebrow="The Team" title="48 humans, zero egos"
-          subtitle="Editors, engineers, analysts and growth leads across 11 countries." />
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {team.map((m, i) => (
-            <Reveal key={m.name} delay={(i % 4) * 0.07}>
-              <div className="card-base card-hover group h-full p-7 text-center">
-                <Avatar name={m.name} color={m.color} size="h-20 w-20" className="mx-auto !text-xl transition-transform duration-300 group-hover:scale-110" />
-                <h3 className="mt-4 font-bold text-slate-900 dark:text-white">{m.name}</h3>
-                <p className="text-xs font-semibold uppercase tracking-widest text-primary">{m.role}</p>
-                <p className="mt-3 text-sm leading-relaxed text-slate-500 dark:text-slate-400">{m.bio}</p>
+      {/* Values Grid */}
+      <section className="py-16 px-6 sm:px-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {values.map((v, i) => (
+            <Reveal key={v.title} delay={i * 0.1}>
+              <div className="glass-card p-8 rounded-[2px] h-full space-y-4">
+                <span className="w-10 h-10 bg-secondary/15 text-secondary flex items-center justify-center rounded-[2px] font-bold">0{i+1}</span>
+                <h3 className="font-bold text-xl text-primary">{v.title}</h3>
+                <p className="text-on-surface-variant text-sm leading-relaxed">{v.text}</p>
               </div>
             </Reveal>
           ))}
         </div>
-        <Reveal className="mt-12 text-center">
-          <Button to="/contact" variant="outline" size="lg">We're hiring — say hello <ArrowRight size={16} /></Button>
-        </Reveal>
-      </Container>
+      </section>
 
-      <TrustedCompanies />
-      <TestimonialsSection count={9} />
-      <NewsletterCTA />
-    </>
+      {/* Story Timeline */}
+      <section className="bg-surface-container-low py-24 px-6 sm:px-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16 space-y-4">
+            <h2 className="font-headline-lg text-primary">From Consultancy to Global Powerhouse</h2>
+            <p className="text-on-surface-variant text-sm max-w-lg mx-auto">
+              Our milestone journey engineering digital velocity.
+            </p>
+          </div>
+
+          <div className="relative border-l border-outline-variant/50 ml-4 md:ml-32 space-y-12">
+            {timeline.map((item, idx) => (
+              <div key={idx} className="relative pl-8 md:pl-12 group">
+                {/* Dot */}
+                <div className="absolute -left-[9px] top-1.5 w-4 h-4 rounded-[2px] bg-white border-2 border-secondary group-hover:bg-secondary transition-colors" />
+                
+                <div className="space-y-2">
+                  <span className="text-xs font-bold text-secondary">{item.year}</span>
+                  <h3 className="font-bold text-lg text-primary">{item.title}</h3>
+                  <p className="text-on-surface-variant text-sm leading-relaxed max-w-2xl">{item.text}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Team grid */}
+      <section className="py-24 px-6 sm:px-8 max-w-7xl mx-auto">
+        <div className="text-center mb-16 space-y-4">
+          <h2 className="font-headline-lg text-primary">Our Leadership Team</h2>
+          <p className="text-on-surface-variant text-sm max-w-lg mx-auto">
+            Growth consultants and technical engineers aligning values with campaign performance.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {team.map((t, idx) => (
+            <div key={idx} className="glass-card p-8 rounded-[2px] hover:border-secondary transition-all text-center space-y-4 group">
+              <div className="w-24 h-24 rounded-[2px] bg-secondary/10 text-secondary font-bold text-2xl flex items-center justify-center mx-auto group-hover:scale-105 transition-transform duration-300">
+                {t.name[0]}
+              </div>
+              <div className="space-y-1">
+                <h4 className="font-bold text-lg text-primary">{t.name}</h4>
+                <p className="text-xs font-bold text-secondary uppercase tracking-widest">{t.role}</p>
+              </div>
+              <p className="text-on-surface-variant text-xs leading-relaxed">{t.bio}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
   );
 }

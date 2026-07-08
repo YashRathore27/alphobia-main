@@ -1,47 +1,46 @@
-import { HashRouter, Routes, Route } from "react-router-dom";
-import { AppProvider } from "./hooks";
-import Layout from "./components/layout/Layout";
+import Navbar from "./components/Navbar";
+import { Footer } from "./components/NewsletterFooter";
+import { useRoute } from "./router";
 import Home from "./pages/Home";
-import Deals from "./pages/Deals";
-import Products from "./pages/Products";
-import ProductDetails from "./pages/ProductDetails";
-import Coupons from "./pages/Coupons";
-import Reviews from "./pages/Reviews";
-import Compare from "./pages/Compare";
-import Services from "./pages/Services";
-import Blog from "./pages/Blog";
-import Advertise from "./pages/Advertise";
+import DigitalMarketing from "./pages/DigitalMarketing";
+import AffiliateMarketing from "./pages/AffiliateMarketing";
+import AdvertisingPrograms from "./pages/AdvertisingPrograms";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import SearchPage from "./pages/SearchPage";
-import Categories from "./pages/Categories";
-import NotFound from "./pages/NotFound";
+import CaseStudies from "./pages/CaseStudies";
+import Industries from "./pages/Industries";
+import Insights from "./pages/Insights";
+import InsightDetail from "./pages/InsightDetail";
 
-export default function App() {
+const PAGES = {
+  home: Home,
+  "digital-marketing": DigitalMarketing,
+  "affiliate-marketing": AffiliateMarketing,
+  "advertising-programs": AdvertisingPrograms,
+  about: About,
+  contact: Contact,
+  "case-studies": CaseStudies,
+  industries: Industries,
+  insights: Insights,
+  insight: InsightDetail
+};
+
+function App() {
+  const { route, id } = useRoute();
+  const Page = PAGES[route] ?? Home;
+
   return (
-    <AppProvider>
-      <HashRouter>
-        <Routes>
-          <Route element={<Layout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/deals" element={<Deals />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/products/:slug" element={<ProductDetails />} />
-            <Route path="/coupons" element={<Coupons />} />
-            <Route path="/reviews" element={<Reviews />} />
-            <Route path="/compare" element={<Compare />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/advertise" element={<Advertise />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/search" element={<SearchPage />} />
-            <Route path="/categories" element={<Categories />} />
-            <Route path="/categories/:id" element={<Categories />} />
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
-      </HashRouter>
-    </AppProvider>
+    <div className="min-h-screen bg-background text-on-surface font-body-md">
+      {/* Dynamic Background shader on the main wrapper or nested inside sections */}
+      <Navbar />
+      <main key={route + (id ?? "")} className="relative z-10">
+        <Page id={id} />
+      </main>
+      <Footer />
+    </div>
   );
 }
+
+export {
+  App as default
+};
