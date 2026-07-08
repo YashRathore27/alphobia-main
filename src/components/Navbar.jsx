@@ -48,8 +48,8 @@ function Navbar() {
           {/* 1. Logo */}
           <button onClick={() => go("home")} className="flex shrink-0 items-center gap-2 cursor-pointer">
             <span style={{ fontFamily: "'Caveat', cursive" }} className="text-3xl font-bold tracking-normal">
-              <span className="text-slate-900">Al</span>
-              <span className="text-blue-600">phobia</span>
+              <span className="text-primary">Al</span>
+              <span className="text-secondary">phobia</span>
             </span>
           </button>
 

@@ -278,7 +278,7 @@ export default function Home() {
                 Learn More <ArrowRight className="w-4 h-4" />
               </Button>
             </div>
-            <span className="material-symbols-outlined absolute bottom-6 right-6 text-[100px] opacity-20 font-thin pointer-events-none transition-transform duration-700 group-hover:scale-110">
+            <span className="material-symbols-outlined absolute opacity-15 font-thin pointer-events-none" style={{ fontSize: "400px", lineHeight: 1, bottom: "-50px", right: "-30px", transform: "perspective(500px) rotateX(25deg) rotateY(-12deg)" }}>
               hub
             </span>
           </div>

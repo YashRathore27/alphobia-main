@@ -2,7 +2,7 @@
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-heading: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "DM Sans", ui-sans-serif, system-ui, sans-serif;
 
   --color-primary: #111827;
   --color-primary-dark: #0f172a;
@@ -724,7 +724,7 @@ h3 span.text-secondary,
 }
 
 .font-display-xl {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: 4.5rem; /* 72px */
   font-weight: 800;
   line-height: 5rem; /* 80px */
@@ -738,7 +738,7 @@ h3 span.text-secondary,
   }
 }
 .font-headline-lg {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: 3rem; /* 48px */
   font-weight: 700;
   line-height: 3.5rem; /* 56px */
@@ -752,7 +752,7 @@ h3 span.text-secondary,
   }
 }
 .font-headline-md {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: 1.875rem; /* 30px */
   font-weight: 600;
   line-height: 2.375rem; /* 38px */
