@@ -7,6 +7,35 @@ import OrbitHeroAnimation from "../components/OrbitHeroAnimation";
 
 
 
+function CompanyLogo({ name, domain }) {
+  const [src, setSrc] = useState(`https://logo.clearbit.com/${domain}`);
+  const [failed, setFailed] = useState(false);
+
+  if (failed) {
+    return (
+      <span className="h-7 w-7 rounded-md bg-slate-200 flex items-center justify-center text-slate-500 text-xs font-bold shrink-0">
+        {name.charAt(0)}
+      </span>
+    );
+  }
+
+  return (
+    <img
+      src={src}
+      alt={`${name} logo`}
+      loading="lazy"
+      className="h-7 w-7 rounded-md object-contain shrink-0"
+      onError={() => {
+        if (src.includes("clearbit")) {
+          setSrc(`https://www.google.com/s2/favicons?domain=${domain}&sz=64`);
+        } else {
+          setFailed(true);
+        }
+      }}
+    />
+  );
+}
+
 // Flowing webgl gradient shader component for background
 function ShaderBackground({ canvasId }) {
   const canvasRef = useRef(null);
@@ -120,6 +149,15 @@ const COMPANIES = [
 ];
 
 export default function Home() {
+  const [activeStep, setActiveStep] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveStep((prev) => (prev + 1) % 5);
+    }, 2500);
+    return () => clearInterval(interval);
+  }, []);
+
   const go = (r) => {
     navigate(r);
   };
@@ -173,7 +211,7 @@ export default function Home() {
                   <Button onClick={() => go("contact")} variant="accent" size="lg" className="shadow-xl rounded-[2px]">
                     Book a Strategy Call
                   </Button>
-                  <Button onClick={() => go("about")} variant="outline" size="lg" className="bg-white/10 backdrop-blur-md border border-white/20 text-slate-800 hover:bg-white/20 transition-all rounded-[2px]">
+                  <Button onClick={() => go("about")} variant="outline" size="lg" className="bg-transparent border border-slate-300 text-slate-800 hover:bg-slate-200/50 transition-all rounded-[2px]">
                     Our Approach
                   </Button>
                 </div>
@@ -200,7 +238,7 @@ export default function Home() {
       </div>
 
       {/* Trusted By logo cloud */}
-      <section className="py-10 border-y border-outline-variant/20 z-10 relative overflow-hidden" aria-label="Trusted companies">
+      <section className="py-10 z-10 relative overflow-hidden" aria-label="Trusted companies">
         <Container>
           <p className="mb-7 text-center text-xs font-semibold uppercase tracking-[0.2em] text-outline">{`Pioneering the future with global industry leaders`}</p>
         </Container>
@@ -208,12 +246,7 @@ export default function Home() {
           <div className="flex w-max animate-marquee items-center gap-14 px-7 opacity-60 font-bold tracking-tighter">
             {[...COMPANIES, ...COMPANIES].map((c, i) => (
               <span key={`${c.id}-${i}`} className="flex items-center gap-3 text-lg font-bold text-slate-700 hover:text-slate-950 transition-colors cursor-pointer">
-                <img 
-                  src={`https://www.google.com/s2/favicons?domain=${c.domain}&sz=64`} 
-                  alt={`${c.name} logo`} 
-                  loading="lazy" 
-                  className="h-7 w-7 rounded-md object-contain" 
-                />
+                <CompanyLogo name={c.name} domain={c.domain} />
                 {c.name}
               </span>
             ))}
@@ -245,7 +278,7 @@ export default function Home() {
                 Learn More <ArrowRight className="w-4 h-4" />
               </Button>
             </div>
-            <span className="material-symbols-outlined absolute -bottom-10 -right-10 text-[260px] opacity-10 font-thin pointer-events-none transition-transform duration-700 group-hover:scale-110">
+            <span className="material-symbols-outlined absolute bottom-6 right-6 text-[100px] opacity-20 font-thin pointer-events-none transition-transform duration-700 group-hover:scale-110">
               hub
             </span>
           </div>
@@ -301,7 +334,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* Our Execution Protocol Process Section */}
       <section className="py-24 bg-primary text-on-primary relative overflow-hidden z-10">
         <div className="px-6 sm:px-8 max-w-7xl mx-auto relative z-10">
@@ -313,58 +345,40 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-5 gap-10 relative">
-            {/* Desktop progress connector line */}
-            <div className="hidden md:block absolute top-12 left-0 w-full h-[1px] bg-white/10 -z-10" />
+            {/* Desktop progress connector line background */}
+            <div className="hidden md:block absolute top-10 left-[10%] right-[10%] h-[2px] bg-white/10 -z-10" />
+            {/* Animated progress fill */}
+            <div 
+              className="hidden md:block absolute top-10 left-[10%] h-[2px] bg-secondary -z-10 transition-all duration-700 ease-in-out" 
+              style={{ width: `${(activeStep / 4) * 80}%` }}
+            />
 
-            <div className="space-y-4">
-              <div className="w-20 h-20 rounded-full bg-white/10 border-2 border-secondary flex items-center justify-center font-bold text-2xl text-white backdrop-blur">
-                01
+            {[
+              { num: "01", name: "Discovery", desc: "Deep-dive audit into current ecosystems and competitor vulnerabilities." },
+              { num: "02", name: "Strategy", desc: "Tailored growth roadmap with defined KPIs and channel mix priorities." },
+              { num: "03", name: "Execution", desc: "Rapid deployment of high-performance campaign creative assets." },
+              { num: "04", name: "Optimization", desc: "Real-time multivariate testing and algorithmic budget reallocation." },
+              { num: "05", name: "Growth", desc: "Scaling successful protocols across global consumer territories." }
+            ].map((step, idx) => (
+              <div key={step.num} className="space-y-4 flex flex-col items-center text-center">
+                <div 
+                  className={`w-20 h-20 rounded-full flex items-center justify-center font-bold text-2xl text-white backdrop-blur transition-all duration-500 cursor-pointer ${
+                    idx <= activeStep 
+                      ? "bg-secondary/20 border-2 border-secondary shadow-[0_0_15px_rgba(37,99,235,0.4)]" 
+                      : "bg-white/10 border border-white/20"
+                  }`}
+                  onClick={() => setActiveStep(idx)}
+                >
+                  {step.num}
+                </div>
+                <h4 className={`font-bold text-lg transition-colors duration-500 ${idx <= activeStep ? "text-secondary" : "text-white"}`}>
+                  {step.name}
+                </h4>
+                <p className="text-white/50 text-xs leading-relaxed">
+                  {step.desc}
+                </p>
               </div>
-              <h4 className="font-bold text-lg text-white">Discovery</h4>
-              <p className="text-white/50 text-xs leading-relaxed">
-                Deep-dive audit into current ecosystems and competitor vulnerabilities.
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              <div className="w-20 h-20 rounded-full bg-white/10 border border-white/20 flex items-center justify-center font-bold text-2xl text-white backdrop-blur">
-                02
-              </div>
-              <h4 className="font-bold text-lg text-white">Strategy</h4>
-              <p className="text-white/50 text-xs leading-relaxed">
-                Tailored growth roadmap with defined KPIs and channel mix priorities.
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              <div className="w-20 h-20 rounded-full bg-white/10 border border-white/20 flex items-center justify-center font-bold text-2xl text-white backdrop-blur">
-                03
-              </div>
-              <h4 className="font-bold text-lg text-white">Execution</h4>
-              <p className="text-white/50 text-xs leading-relaxed">
-                Rapid deployment of high-performance campaign creative assets.
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              <div className="w-20 h-20 rounded-full bg-white/10 border border-white/20 flex items-center justify-center font-bold text-2xl text-white backdrop-blur">
-                04
-              </div>
-              <h4 className="font-bold text-lg text-white">Optimization</h4>
-              <p className="text-white/50 text-xs leading-relaxed">
-                Real-time multivariate testing and algorithmic budget reallocation.
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              <div className="w-20 h-20 rounded-full bg-white/10 border border-white/20 flex items-center justify-center font-bold text-2xl text-white backdrop-blur">
-                05
-              </div>
-              <h4 className="font-bold text-lg text-white">Growth</h4>
-              <p className="text-white/50 text-xs leading-relaxed">
-                Scaling successful protocols across global consumer territories.
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>

@@ -128,7 +128,7 @@ export const blogs = [
     title: "Omnichannel Attribution: Solving First-Touch vs Last-Touch",
     excerpt: "Stop relying on basic analytics dashboards. Learn how to map complex enterprise conversion funnels using multi-touch modeling.",
     tag: "Data Studies",
-    image: px(97080),
+    image: px(590022),
     author: "Marcus Chen",
     date: "2026-06-15T09:00:00Z",
     readTime: 8,

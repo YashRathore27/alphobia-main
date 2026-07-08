@@ -110,9 +110,9 @@ export default function AdvertisingPrograms() {
   return (
     <div className="bg-background text-on-surface min-h-screen">
       {/* Hero Section */}
-      <section className="relative min-h-[750px] flex items-center overflow-hidden pt-32 pb-24">
+      <section className="relative min-h-[700px] flex items-center overflow-hidden pt-32 pb-12">
         {/* Image Background */}
-        <div className="absolute inset-0 w-full h-full opacity-35 pointer-events-none z-0">
+        <div className="absolute inset-0 w-full h-full opacity-60 pointer-events-none z-0">
           <img 
             src="/advertisment-marketing-hero.jpeg" 
             alt="Advertising Hero Background" 
@@ -122,27 +122,44 @@ export default function AdvertisingPrograms() {
         </div>
 
         <div className="px-6 sm:px-8 max-w-7xl mx-auto relative z-10 w-full">
-          <div className="max-w-3xl space-y-6">
-            <span className="inline-block px-4 py-1 rounded-[2px] bg-secondary/10 text-secondary font-label-sm text-label-sm mb-2">
-              GLOBAL ADVERTISING PROGRAMS
-            </span>
-            <h1 className="font-display-xl text-primary leading-tight">
-              Precision-Targeted Advertising for Enterprise Growth
-            </h1>
-            <p className="font-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
-              Leverage the power of algorithmic bidding and behavioral intelligence. We don't just buy ads; we engineer high-performance ecosystems that scale with your ambitions.
-            </p>
-            <div className="flex flex-wrap gap-4 pt-4">
-              <Button onClick={() => go("contact")} variant="accent" size="lg" className="flex items-center gap-2">
-                Review Performance <span className="material-symbols-outlined">trending_up</span>
-              </Button>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="space-y-6">
+              <span className="inline-block px-4 py-1 rounded-[2px] bg-secondary/10 text-secondary font-label-sm text-label-sm mb-2">
+                GLOBAL ADVERTISING PROGRAMS
+              </span>
+              <h1 className="font-display-xl text-primary leading-tight">
+                Precision-Targeted Advertising for Enterprise Growth
+              </h1>
+              <p className="font-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
+                Leverage the power of algorithmic bidding and behavioral intelligence. We don't just buy ads; we engineer high-performance ecosystems that scale with your ambitions.
+              </p>
+              <div className="flex flex-wrap gap-4 pt-4">
+                <Button onClick={() => go("contact")} variant="accent" size="lg" className="flex items-center gap-2 animate-pulse">
+                  Review Performance <span className="material-symbols-outlined">trending_up</span>
+                </Button>
+              </div>
             </div>
+
+            <Reveal delay={0.2} className="relative flex justify-center lg:justify-end">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 relative z-20 w-full max-w-md">
+                <div className="bg-white/80 backdrop-blur-md p-6 rounded-[2px] border border-outline-variant/30 shadow-lg text-center">
+                  <div className="text-xs text-on-surface-variant mb-1 font-bold uppercase tracking-wider">AD SPEND REACH</div>
+                  <div className="font-bold text-3xl text-secondary">$45M+</div>
+                  <p className="text-[10px] text-on-surface-variant mt-1">Managed Annually</p>
+                </div>
+                <div className="bg-white/80 backdrop-blur-md p-6 rounded-[2px] border border-outline-variant/30 shadow-lg text-center">
+                  <div className="text-xs text-on-surface-variant mb-1 font-bold uppercase tracking-wider">AVERAGE ROAS</div>
+                  <div className="font-bold text-3xl text-primary">5.8x</div>
+                  <p className="text-[10px] text-on-surface-variant mt-1">Blended Client Return</p>
+                </div>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
       {/* Ad Platforms Bento Grid */}
-      <section className="py-24 px-6 sm:px-8 max-w-7xl mx-auto">
+      <section className="py-16 px-6 sm:px-8 max-w-7xl mx-auto">
         <div className="text-center mb-16 space-y-4">
           <h2 className="font-headline-lg text-primary">Multi-Channel Dominance</h2>
           <p className="text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
@@ -415,20 +432,24 @@ export default function AdvertisingPrograms() {
       </section>
 
       {/* Final CTA Banner */}
-      <section className="py-20 px-6 sm:px-8 bg-secondary text-on-secondary w-full">
-        <div className="max-w-7xl mx-auto text-center space-y-6">
+      <section className="py-20 px-6 sm:px-8 bg-primary text-on-primary w-full relative overflow-hidden">
+        <div className="max-w-7xl mx-auto text-center space-y-6 relative z-10">
           <h2 className="font-headline-lg text-white">Ready to Scale Your Program?</h2>
           <p className="max-w-2xl mx-auto text-white/80 leading-relaxed text-sm">
             Let's audit your current ad accounts and identify the immediate efficiency gains that could be driving your bottom line today.
           </p>
           <div className="flex justify-center gap-4 pt-4">
-            <Button onClick={() => go("contact")} className="bg-white text-secondary px-8 py-4 rounded-[2px] font-bold hover:bg-opacity-90 transition-all text-sm">Book Audit Call</Button>
-            <button 
+            <Button onClick={() => go("contact")} variant="secondary" size="lg" className="bg-white text-secondary hover:bg-white/90">
+              Book Audit Call
+            </Button>
+            <Button 
               onClick={() => go("insights")}
-              className="bg-white/10 text-white border border-white/20 px-8 py-4 rounded-[2px] font-bold hover:bg-white/20 transition-all text-sm cursor-pointer"
+              variant="outline"
+              size="lg"
+              className="bg-white/10 text-white border-white/20 hover:bg-white/20 cursor-pointer"
             >
               View Industry Insights
-            </button>
+            </Button>
           </div>
         </div>
       </section>

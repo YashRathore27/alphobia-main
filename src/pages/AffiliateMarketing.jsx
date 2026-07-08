@@ -28,7 +28,7 @@ export default function AffiliateMarketing() {
           <img 
             src="/affiliated-marketing-hero.jpeg" 
             alt="Affiliate Marketing Hero Background" 
-            className="w-full h-full object-cover opacity-35"
+            className="w-full h-full object-cover opacity-60"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/50 to-background"></div>
         </div>
@@ -51,35 +51,18 @@ export default function AffiliateMarketing() {
               </div>
             </div>
 
-          <div className="hidden lg:block relative">
-            <div className="glass-card rounded-[2px] p-8 border border-outline-variant relative z-10 flex flex-col justify-center items-center h-[400px]">
-              {/* Dynamic Network SVG representation */}
-              <svg className="w-full max-w-[320px] h-auto opacity-80" viewBox="0 0 400 400">
-                <circle cx="200" cy="200" fill="none" r="40" stroke="#0058be" strokeWidth="2"></circle>
-                <circle cx="200" cy="200" fill="#0058be" r="10"></circle>
-                
-                <g className="network-nodes">
-                  <circle cx="80" cy="120" fill="#e5eeff" r="15" stroke="#0058be" strokeWidth="1"></circle>
-                  <circle cx="320" cy="80" fill="#e5eeff" r="12" stroke="#0058be" strokeWidth="1"></circle>
-                  <circle cx="340" cy="280" fill="#e5eeff" r="18" stroke="#0058be" strokeWidth="1"></circle>
-                  <circle cx="100" cy="320" fill="#e5eeff" r="10" stroke="#0058be" strokeWidth="1"></circle>
-                </g>
-                <path d="M200 200 L80 120" stroke="#0058be" strokeWidth="0.5" strokeDasharray="5" className="network-line"></path>
-                <path d="M200 200 L320 80" stroke="#0058be" strokeWidth="0.5" strokeDasharray="5" className="network-line"></path>
-                <path d="M200 200 L340 280" stroke="#0058be" strokeWidth="0.5" strokeDasharray="5" className="network-line"></path>
-                <path d="M200 200 L100 320" stroke="#0058be" strokeWidth="0.5" strokeDasharray="5" className="network-line"></path>
-              </svg>
-              <div className="absolute bottom-6 right-6 glass-card p-6 border border-outline-variant shadow-xl rounded-[2px] max-w-[200px]">
-                <p className="text-[10px] font-bold text-secondary uppercase tracking-widest">ACTIVE PARTNERS</p>
-                <p className="text-3xl font-extrabold text-primary">12.4k+</p>
-                <div className="mt-2 w-full bg-surface-container h-1 overflow-hidden">
-                  <div className="bg-secondary h-full w-[85%]"></div>
+            <Reveal delay={0.2} className="relative flex justify-center lg:justify-end">
+              <div className="bg-white/80 backdrop-blur-md p-8 border border-outline-variant/30 shadow-lg rounded-[2px] min-w-[240px]">
+                <p className="text-xs font-bold text-secondary uppercase tracking-widest">ACTIVE PARTNERS</p>
+                <p className="text-4xl font-extrabold text-primary mt-2">12.4k+</p>
+                <div className="mt-4 w-full bg-slate-200 h-1.5 overflow-hidden rounded-full">
+                  <div className="bg-secondary h-full w-[85%] rounded-full"></div>
                 </div>
+                <p className="text-[10px] text-on-surface-variant mt-2">Global publisher footprint</p>
               </div>
-            </div>
+            </Reveal>
           </div>
-        </div>
-      </section>
+        </section>
     </div>
 
       {/* Vetting Strategy section */}
@@ -357,13 +340,17 @@ export default function AffiliateMarketing() {
         <div className="max-w-7xl mx-auto text-center space-y-8">
           <h2 className="font-display-xl text-primary">Ready to Build Your Partner Powerhouse?</h2>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button onClick={() => go("contact")} className="bg-secondary text-white px-12 py-5 font-bold hover:bg-secondary/90 transition-all">Schedule Strategy Call</Button>
-            <button 
+            <Button onClick={() => go("contact")} variant="accent" size="lg" className="shadow-2xl">
+              Schedule Strategy Call
+            </Button>
+            <Button 
               onClick={() => go("insights")}
-              className="bg-white text-secondary border-2 border-secondary px-12 py-5 font-bold hover:bg-surface transition-all rounded-[2px] cursor-pointer"
+              variant="outline"
+              size="lg"
+              className="bg-white text-secondary border-secondary hover:bg-surface cursor-pointer"
             >
               View Industry Insights
-            </button>
+            </Button>
           </div>
         </div>
       </section>

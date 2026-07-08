@@ -20,61 +20,49 @@ export default function DigitalMarketing() {
           <img 
             src="/digital-marketing-hero.jpeg" 
             alt="Digital Marketing Hero Background" 
-            className="w-full h-full object-cover opacity-35"
+            className="w-full h-full object-cover opacity-60"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/50 to-background"></div>
         </div>
 
         <section className="relative px-6 sm:px-8 pt-32 pb-20 max-w-7xl mx-auto overflow-hidden z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div className="space-y-6">
-            <span className="inline-block py-1 px-4 mb-3 rounded-[2px] bg-secondary/10 text-secondary font-label-sm text-label-sm uppercase tracking-widest">
-              Digital Marketing Strategy
-            </span>
-            <h1 className="font-display-xl text-primary leading-tight">
-              Full-Funnel <span className="text-secondary">Digital Marketing</span> Excellence
-            </h1>
-            <p className="font-body-lg text-on-surface-variant leading-relaxed max-w-xl">
-              We don't just drive traffic; we engineer growth. Our data-centric approach leverages advanced analytics and creative precision to scale your global digital presence.
-            </p>
-            <div className="flex flex-wrap gap-4 pt-4">
-              <Button as="a" href="#audit" className="bg-secondary text-white px-8 py-4 font-bold rounded-[2px] shadow-lg hover:translate-y-[-2px] transition-transform">
-                Request Performance Audit
-              </Button>
+            <div className="space-y-6">
+              <span className="inline-block py-1 px-4 mb-3 rounded-[2px] bg-secondary/10 text-secondary font-label-sm text-label-sm uppercase tracking-widest">
+                Digital Marketing Strategy
+              </span>
+              <h1 className="font-display-xl text-primary leading-tight">
+                Full-Funnel <span className="text-secondary">Digital Marketing</span> Excellence
+              </h1>
+              <p className="font-body-lg text-on-surface-variant leading-relaxed max-w-xl">
+                We don't just drive traffic; we engineer growth. Our data-centric approach leverages advanced analytics and creative precision to scale your global digital presence.
+              </p>
+              <div className="flex flex-wrap gap-4 pt-4">
+                <Button as="a" href="#audit" className="bg-secondary text-white px-8 py-4 font-bold rounded-[2px] shadow-lg hover:translate-y-[-2px] transition-transform">
+                  Request Performance Audit
+                </Button>
+              </div>
             </div>
-          </div>
 
-          <Reveal delay={0.2} className="relative">
-            <div className="glass-card rounded-[2px] p-6 shadow-2xl relative z-20 overflow-hidden">
-              <div className="flex justify-between items-center mb-6">
-                <div className="flex gap-2">
-                  <div className="w-3 h-3 rounded-[2px] bg-red-400"></div>
-                  <div className="w-3 h-3 rounded-[2px] bg-yellow-400"></div>
-                  <div className="w-3 h-3 rounded-[2px] bg-green-400"></div>
+            <Reveal delay={0.2} className="relative flex justify-center lg:justify-end">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 relative z-20 w-full max-w-lg">
+                <div className="bg-white/80 backdrop-blur-md p-6 rounded-[2px] border border-outline-variant/30 shadow-lg text-center">
+                  <div className="text-xs text-on-surface-variant mb-1 font-bold uppercase tracking-wider">ROAS</div>
+                  <div className="font-bold text-3xl text-secondary">4.2x</div>
+                  <p className="text-[10px] text-on-surface-variant mt-1">Campaign Blended</p>
                 </div>
-                <div className="text-label-sm font-label-sm text-outline uppercase">Marketing Dashboard v4.2</div>
-              </div>
-              <img 
-                className="w-full rounded-[2px] border border-outline-variant/30" 
-                alt="Marketing Dashboard Mockup" 
-                src="https://images.pexels.com/photos/106344/pexels-photo-106344.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=400&w=800" 
-              />
-              <div className="grid grid-cols-3 gap-4 mt-6 text-center">
-                <div className="bg-white/40 p-4 rounded-[2px] border border-white/60">
-                  <div className="text-xs text-on-surface-variant mb-1">ROAS</div>
-                  <div className="font-bold text-2xl text-secondary">4.2x</div>
+                <div className="bg-white/80 backdrop-blur-md p-6 rounded-[2px] border border-outline-variant/30 shadow-lg text-center">
+                  <div className="text-xs text-on-surface-variant mb-1 font-bold uppercase tracking-wider">CTR</div>
+                  <div className="font-bold text-3xl text-primary">3.8%</div>
+                  <p className="text-[10px] text-on-surface-variant mt-1">Average Click Rate</p>
                 </div>
-                <div className="bg-white/40 p-4 rounded-[2px] border border-white/60">
-                  <div className="text-xs text-on-surface-variant mb-1">CTR</div>
-                  <div className="font-bold text-2xl text-primary">3.8%</div>
-                </div>
-                <div className="bg-white/40 p-4 rounded-[2px] border border-white/60">
-                  <div className="text-xs text-on-surface-variant mb-1">CPA</div>
-                  <div className="font-bold text-2xl text-on-surface">-$12</div>
+                <div className="bg-white/80 backdrop-blur-md p-6 rounded-[2px] border border-outline-variant/30 shadow-lg text-center">
+                  <div className="text-xs text-on-surface-variant mb-1 font-bold uppercase tracking-wider">CPA</div>
+                  <div className="font-bold text-3xl text-primary">-$12</div>
+                  <p className="text-[10px] text-on-surface-variant mt-1">Target Reduction</p>
                 </div>
               </div>
-            </div>
-          </Reveal>
+            </Reveal>
         </div>
       </section>
     </div>
@@ -337,15 +325,17 @@ export default function DigitalMarketing() {
             Join the ranks of high-growth enterprises leveraging Alphobia's full-funnel marketing strategies. Your global dominance starts with a single strategy session.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button to="/contact" variant="accent" size="lg" className="shadow-2xl">
+            <Button onClick={() => navigate("contact")} variant="accent" size="lg" className="shadow-2xl">
               Book Free Strategy Session
             </Button>
-            <button 
+            <Button 
               onClick={() => navigate("case-studies")}
-              className="bg-white/10 backdrop-blur-md border border-white/20 px-10 py-5 rounded-[2px] font-bold text-xl hover:bg-white/20 transition-all text-white cursor-pointer"
+              variant="outline"
+              size="lg"
+              className="bg-white/10 text-white border-white/20 hover:bg-white/20"
             >
               View Case Studies
-            </button>
+            </Button>
           </div>
         </div>
       </section>
