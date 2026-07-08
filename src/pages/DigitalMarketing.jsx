@@ -20,13 +20,12 @@ export default function DigitalMarketing() {
           <img 
             src="/digital-marketing-hero.jpeg" 
             alt="Digital Marketing Hero Background" 
-            className="w-full h-full object-cover opacity-60"
+            className="w-full h-full object-cover opacity-90"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/50 to-background"></div>
-        </div>
+          </div>
 
         <section className="relative px-6 sm:px-8 pt-32 pb-20 max-w-7xl mx-auto overflow-hidden z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <div className="space-y-6">
               <span className="inline-block py-1 px-4 mb-3 rounded-[2px] bg-secondary/10 text-secondary font-label-sm text-label-sm uppercase tracking-widest">
                 Digital Marketing Strategy
@@ -44,7 +43,7 @@ export default function DigitalMarketing() {
               </div>
             </div>
 
-            <Reveal delay={0.2} className="relative flex justify-center lg:justify-end">
+            <Reveal delay={0.2} className="relative flex justify-center lg:justify-end self-end">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 relative z-20 w-full max-w-lg">
                 <div className="bg-white/80 backdrop-blur-md p-6 rounded-[2px] border border-outline-variant/30 shadow-lg text-center">
                   <div className="text-xs text-on-surface-variant mb-1 font-bold uppercase tracking-wider">ROAS</div>
@@ -206,6 +205,7 @@ export default function DigitalMarketing() {
 
       {/* Success Metrics */}
       <section className="bg-primary text-on-primary py-24 px-6 sm:px-8 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-secondary/15 blur-[100px] rounded-full" />
         <div className="max-w-7xl mx-auto relative z-10">
           <h2 className="font-headline-lg text-white mb-16 text-center">Metrics That Matter</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

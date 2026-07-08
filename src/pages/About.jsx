@@ -14,9 +14,9 @@ const timeline = [
 ];
 
 const team = [
-  { name: "Ava Lindqvist", role: "Co-founder & CEO", bio: "Ex-growth executive at two B2B tech unicorns. Oversees global consultancy operations from London." },
-  { name: "Marcus Chen", role: "Co-founder & CTO", bio: "Attribution architecture lead. Built our unified performance analytics engine." },
-  { name: "Priya Sharma", role: "VP, Growth Services", bio: "Tactical operations lead for Paid Media & SEO. 12+ years of enterprise scaling experience." }
+  { name: "Ava Lindqvist", role: "Co-founder & CEO", bio: "Ex-growth executive at two B2B tech unicorns. Oversees global consultancy operations from London.", img: "https://i.pravatar.cc/300?u=ava-lindqvist" },
+  { name: "Marcus Chen", role: "Co-founder & CTO", bio: "Attribution architecture lead. Built our unified performance analytics engine.", img: "https://i.pravatar.cc/300?u=marcus-chen" },
+  { name: "Priya Sharma", role: "VP, Growth Services", bio: "Tactical operations lead for Paid Media & SEO. 12+ years of enterprise scaling experience.", img: "https://i.pravatar.cc/300?u=priya-sharma" }
 ];
 
 export default function About() {
@@ -89,9 +89,7 @@ export default function About() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {team.map((t, idx) => (
             <div key={idx} className="glass-card p-8 rounded-[2px] hover:border-secondary transition-all text-center space-y-4 group">
-              <div className="w-24 h-24 rounded-[2px] bg-secondary/10 text-secondary font-bold text-2xl flex items-center justify-center mx-auto group-hover:scale-105 transition-transform duration-300">
-                {t.name[0]}
-              </div>
+              <img src={t.img} alt={t.name} className="w-24 h-24 rounded-[2px] object-cover mx-auto group-hover:scale-105 transition-transform duration-300" />
               <div className="space-y-1">
                 <h4 className="font-bold text-lg text-primary">{t.name}</h4>
                 <p className="text-xs font-bold text-secondary uppercase tracking-widest">{t.role}</p>

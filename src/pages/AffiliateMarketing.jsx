@@ -25,16 +25,15 @@ export default function AffiliateMarketing() {
       {/* Hero Section */}
       <div className="relative w-full overflow-hidden border-b border-outline-variant/10">
         <div className="absolute inset-0 pointer-events-none z-0">
-          <img 
-            src="/affiliated-marketing-hero.jpeg" 
-            alt="Affiliate Marketing Hero Background" 
-            className="w-full h-full object-cover opacity-60"
+          <img
+            src="/affiliated-marketing-hero.jpeg"
+            alt="Affiliate Marketing Hero Background"
+            className="w-full h-full object-cover opacity-90"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/50 to-background"></div>
-        </div>
+          </div>
 
         <section className="relative px-6 sm:px-8 pt-32 pb-20 max-w-7xl mx-auto overflow-hidden z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <div className="space-y-8">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-secondary/10 border border-secondary/20 rounded-[2px] w-fit">
                 <span className="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
@@ -51,7 +50,7 @@ export default function AffiliateMarketing() {
               </div>
             </div>
 
-            <Reveal delay={0.2} className="relative flex justify-center lg:justify-end">
+            <Reveal delay={0.2} className="relative flex justify-center lg:justify-end self-end">
               <div className="bg-white/80 backdrop-blur-md p-8 border border-outline-variant/30 shadow-lg rounded-[2px] min-w-[240px]">
                 <p className="text-xs font-bold text-secondary uppercase tracking-widest">ACTIVE PARTNERS</p>
                 <p className="text-4xl font-extrabold text-primary mt-2">12.4k+</p>
@@ -63,7 +62,7 @@ export default function AffiliateMarketing() {
             </Reveal>
           </div>
         </section>
-    </div>
+      </div>
 
       {/* Vetting Strategy section */}
       <section className="bg-surface py-24 px-6 sm:px-8">
@@ -81,10 +80,10 @@ export default function AffiliateMarketing() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="glass-card p-8 rounded-[2px] hover:-translate-y-2 transition-all duration-300 border-b-4 border-b-secondary">
+            <div className="group/card glass-card p-8 rounded-[2px] hover:-translate-y-2 transition-all duration-300 border-b-4 border-b-secondary">
               <div className="mb-6 flex items-center justify-between">
                 <span className="material-symbols-outlined text-secondary text-4xl">strategy</span>
-                <span className="text-outline text-4xl font-bold opacity-10">01</span>
+                <span className="text-outline group-hover/card:text-secondary text-4xl font-bold opacity-10 group-hover/card:opacity-100 transition-all duration-300">01</span>
               </div>
               <h3 className="font-bold text-xl text-primary mb-3">Strategic Mapping</h3>
               <p className="text-on-surface-variant text-sm leading-relaxed">
@@ -92,10 +91,10 @@ export default function AffiliateMarketing() {
               </p>
             </div>
 
-            <div className="glass-card p-8 rounded-[2px] hover:-translate-y-2 transition-all duration-300 border-b-4 border-b-primary">
+            <div className="group/card glass-card p-8 rounded-[2px] hover:-translate-y-2 transition-all duration-300 border-b-4 border-b-primary">
               <div className="mb-6 flex items-center justify-between">
                 <span className="material-symbols-outlined text-secondary text-4xl">verified_user</span>
-                <span className="text-outline text-4xl font-bold opacity-10">02</span>
+                <span className="text-outline group-hover/card:text-secondary text-4xl font-bold opacity-10 group-hover/card:opacity-100 transition-all duration-300">02</span>
               </div>
               <h3 className="font-bold text-xl text-primary mb-3">Quality Vetting</h3>
               <p className="text-on-surface-variant text-sm leading-relaxed">
@@ -103,10 +102,10 @@ export default function AffiliateMarketing() {
               </p>
             </div>
 
-            <div className="glass-card p-8 rounded-[2px] hover:-translate-y-2 transition-all duration-300 border-b-4 border-b-secondary">
+            <div className="group/card glass-card p-8 rounded-[2px] hover:-translate-y-2 transition-all duration-300 border-b-4 border-b-secondary">
               <div className="mb-6 flex items-center justify-between">
                 <span className="material-symbols-outlined text-secondary text-4xl">handshake</span>
-                <span className="text-outline text-4xl font-bold opacity-10">03</span>
+                <span className="text-outline group-hover/card:text-secondary text-4xl font-bold opacity-10 group-hover/card:opacity-100 transition-all duration-300">03</span>
               </div>
               <h3 className="font-bold text-xl text-primary mb-3">Lifecycle Management</h3>
               <p className="text-on-surface-variant text-sm leading-relaxed">
@@ -130,8 +129,7 @@ export default function AffiliateMarketing() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="p-6 border border-outline-variant rounded-[2px] hover:border-secondary transition-colors group">
               <div className="h-40 bg-surface-container-low rounded-[2px] mb-6 flex items-center justify-center relative overflow-hidden">
-                <span className="font-display-xl text-secondary opacity-5 select-none absolute">CPA</span>
-                <span className="material-symbols-outlined text-secondary text-5xl">payments</span>
+                <span className="material-symbols-outlined text-secondary text-8xl">payments</span>
               </div>
               <h4 className="font-bold text-lg text-primary mb-2">CPA (Cost Per Action)</h4>
               <p className="text-on-surface-variant text-xs leading-relaxed">
@@ -141,8 +139,7 @@ export default function AffiliateMarketing() {
 
             <div className="p-6 border border-outline-variant rounded-[2px] hover:border-secondary transition-colors group">
               <div className="h-40 bg-surface-container-low rounded-[2px] mb-6 flex items-center justify-center relative overflow-hidden">
-                <span className="font-display-xl text-secondary opacity-5 select-none absolute">CPL</span>
-                <span className="material-symbols-outlined text-secondary text-5xl">person_add</span>
+                <span className="material-symbols-outlined text-secondary text-8xl">person_add</span>
               </div>
               <h4 className="font-bold text-lg text-primary mb-2">CPL (Cost Per Lead)</h4>
               <p className="text-on-surface-variant text-xs leading-relaxed">
@@ -152,8 +149,7 @@ export default function AffiliateMarketing() {
 
             <div className="p-6 border border-outline-variant rounded-[2px] hover:border-secondary transition-colors group">
               <div className="h-40 bg-surface-container-low rounded-[2px] mb-6 flex items-center justify-center relative overflow-hidden">
-                <span className="font-display-xl text-secondary opacity-5 select-none absolute">REV</span>
-                <span className="material-symbols-outlined text-secondary text-5xl">show_chart</span>
+                <span className="material-symbols-outlined text-secondary text-8xl">show_chart</span>
               </div>
               <h4 className="font-bold text-lg text-primary mb-2">Revenue Share</h4>
               <p className="text-on-surface-variant text-xs leading-relaxed">
@@ -161,10 +157,10 @@ export default function AffiliateMarketing() {
               </p>
             </div>
 
-            <div className="p-6 border border-outline-variant rounded-[2px] bg-primary text-on-primary group">
+            <div className="p-6 border border-outline-variant rounded-[2px] bg-primary text-on-primary group relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-48 h-48 bg-secondary/20 blur-[80px] rounded-full" />
               <div className="h-40 bg-white/10 rounded-[2px] mb-6 flex items-center justify-center relative overflow-hidden">
-                <span className="font-display-xl text-white opacity-10 select-none absolute">HYB</span>
-                <span className="material-symbols-outlined text-white text-5xl">auto_awesome</span>
+                <span className="material-symbols-outlined text-white text-8xl">auto_awesome</span>
               </div>
               <h4 className="font-bold text-lg text-white mb-2">Hybrid Models</h4>
               <p className="text-white/70 text-xs leading-relaxed">
@@ -249,7 +245,7 @@ export default function AffiliateMarketing() {
                       <span>Current Monthly Revenue</span>
                       <span className="font-bold text-white">${revenue.toLocaleString()}</span>
                     </div>
-                    <input 
+                    <input
                       type="range"
                       min="10000"
                       max="2000000"
@@ -264,7 +260,7 @@ export default function AffiliateMarketing() {
                       <span>Desired Partner Scale</span>
                       <span className="font-bold text-white">{partners} Publishers</span>
                     </div>
-                    <input 
+                    <input
                       type="range"
                       min="10"
                       max="1000"
@@ -293,7 +289,7 @@ export default function AffiliateMarketing() {
       <section className="py-24 px-6 sm:px-8 max-w-7xl mx-auto">
         <div className="flex justify-between items-end mb-16">
           <h2 className="font-headline-lg text-primary">Proven Scaling.</h2>
-          <button 
+          <button
             onClick={() => go("case-studies")}
             className="text-secondary font-bold hover:underline flex items-center gap-2"
           >
@@ -303,10 +299,10 @@ export default function AffiliateMarketing() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div onClick={() => go("case-studies")} className="group cursor-pointer space-y-4">
             <div className="aspect-[16/9] overflow-hidden rounded-[2px] relative">
-              <img 
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
-                alt="Case Study Neobank" 
-                src="https://images.pexels.com/photos/5849594/pexels-photo-5849594.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=400&w=800" 
+              <img
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                alt="Case Study Neobank"
+                src="https://images.pexels.com/photos/5849594/pexels-photo-5849594.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=400&w=800"
               />
               <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                 <span className="bg-white text-primary px-6 py-2 font-bold rounded-[2px] text-sm">Read Report</span>
@@ -319,10 +315,10 @@ export default function AffiliateMarketing() {
 
           <div onClick={() => go("case-studies")} className="group cursor-pointer space-y-4">
             <div className="aspect-[16/9] overflow-hidden rounded-[2px] relative">
-              <img 
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
-                alt="Case Study Apparel" 
-                src="https://images.pexels.com/photos/30707531/pexels-photo-30707531.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=400&w=800" 
+              <img
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                alt="Case Study Apparel"
+                src="https://images.pexels.com/photos/30707531/pexels-photo-30707531.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=400&w=800"
               />
               <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                 <span className="bg-white text-primary px-6 py-2 font-bold rounded-[2px] text-sm">Read Report</span>
@@ -343,7 +339,7 @@ export default function AffiliateMarketing() {
             <Button onClick={() => go("contact")} variant="accent" size="lg" className="shadow-2xl">
               Schedule Strategy Call
             </Button>
-            <Button 
+            <Button
               onClick={() => go("insights")}
               variant="outline"
               size="lg"

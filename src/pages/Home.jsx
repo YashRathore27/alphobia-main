@@ -175,10 +175,9 @@ export default function Home() {
           <img 
             src="/HeroImg.jpeg" 
             alt="Hero Background" 
-            className="w-full h-full object-cover opacity-45"
+            className="w-full h-full object-cover opacity-90"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/50 to-background"></div>
-        </div>
+          </div>
 
         <section className="relative min-h-[800px] flex items-center px-6 sm:px-8 max-w-7xl mx-auto py-20 z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full">
@@ -218,7 +217,7 @@ export default function Home() {
               </Reveal>
 
               <Reveal delay={0.4}>
-                <div className="pt-8 flex items-center gap-8 grayscale opacity-50">
+                <div className="pt-8 flex items-center gap-8 grayscale">
                   <span className="font-label-sm uppercase text-xs tracking-tighter">Verified by</span>
                   <div className="flex gap-6 font-bold text-lg">
                     <span>Google Premier</span>
@@ -266,6 +265,7 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* Large Card: Digital Marketing */}
           <div className="md:col-span-2 md:row-span-2 bg-primary p-10 rounded-[2px] text-on-primary flex flex-col justify-between group hover:bg-secondary transition-colors duration-500 overflow-hidden relative min-h-[380px]">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-secondary/15 blur-[100px] rounded-full" />
             <div className="relative z-10 space-y-6">
               <span className="material-symbols-outlined text-5xl text-white">insights</span>
               <h3 className="font-headline-md text-white">Digital Marketing Architecture</h3>
@@ -336,6 +336,7 @@ export default function Home() {
       </section>
       {/* Our Execution Protocol Process Section */}
       <section className="py-24 bg-primary text-on-primary relative overflow-hidden z-10">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-secondary/15 blur-[100px] rounded-full" />
         <div className="px-6 sm:px-8 max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-20 max-w-3xl mx-auto space-y-4">
             <h2 className="font-headline-lg text-white">Our Execution Protocol</h2>

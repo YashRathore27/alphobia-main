@@ -110,37 +110,38 @@ export default function AdvertisingPrograms() {
   return (
     <div className="bg-background text-on-surface min-h-screen">
       {/* Hero Section */}
-      <section className="relative min-h-[700px] flex items-center overflow-hidden pt-32 pb-12">
+      <section className="relative min-h-[500px] flex items-center overflow-hidden pt-28 pb-10">
         {/* Image Background */}
-        <div className="absolute inset-0 w-full h-full opacity-60 pointer-events-none z-0">
+        <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
           <img 
-            src="/advertisment-marketing-hero.jpeg" 
+            src="/advertisment-marketing-hero-marketing-hero.jpeg" 
             alt="Advertising Hero Background" 
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover opacity-90"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/50 to-background"></div>
-        </div>
+          </div>
 
         <div className="px-6 sm:px-8 max-w-7xl mx-auto relative z-10 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <div className="space-y-6">
               <span className="inline-block px-4 py-1 rounded-[2px] bg-secondary/10 text-secondary font-label-sm text-label-sm mb-2">
                 GLOBAL ADVERTISING PROGRAMS
               </span>
               <h1 className="font-display-xl text-primary leading-tight">
-                Precision-Targeted Advertising for Enterprise Growth
+                Precision-Targeted<br />
+                Advertising for<br />
+                <span className="text-secondary">Enterprise Growth</span>
               </h1>
               <p className="font-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
                 Leverage the power of algorithmic bidding and behavioral intelligence. We don't just buy ads; we engineer high-performance ecosystems that scale with your ambitions.
               </p>
               <div className="flex flex-wrap gap-4 pt-4">
-                <Button onClick={() => go("contact")} variant="accent" size="lg" className="flex items-center gap-2 animate-pulse">
+                <Button onClick={() => go("contact")} variant="accent" size="lg" className="flex items-center gap-2">
                   Review Performance <span className="material-symbols-outlined">trending_up</span>
                 </Button>
               </div>
             </div>
 
-            <Reveal delay={0.2} className="relative flex justify-center lg:justify-end">
+            <Reveal delay={0.2} className="relative flex justify-center lg:justify-end self-end">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 relative z-20 w-full max-w-md">
                 <div className="bg-white/80 backdrop-blur-md p-6 rounded-[2px] border border-outline-variant/30 shadow-lg text-center">
                   <div className="text-xs text-on-surface-variant mb-1 font-bold uppercase tracking-wider">AD SPEND REACH</div>
@@ -188,13 +189,14 @@ export default function AdvertisingPrograms() {
           </div>
 
           {/* LinkedIn Ads */}
-          <div className="md:col-span-5 bg-primary text-on-primary rounded-[2px] p-10 hover:active-glow transition-all duration-500 flex flex-col justify-between min-h-[300px]">
+          <div className="md:col-span-5 bg-primary text-on-primary rounded-[2px] p-10 hover:active-glow transition-all duration-500 flex flex-col justify-between min-h-[300px] relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-secondary/15 blur-[100px] rounded-full" />
             <div className="space-y-6">
               <div className="flex items-center gap-4">
                 <span className="material-symbols-outlined text-4xl text-white">corporate_fare</span>
                 <h3 className="font-headline-md text-white">LinkedIn B2B</h3>
               </div>
-              <p className="text-on-primary-container text-sm leading-relaxed">
+              <p className="text-white/80 text-sm leading-relaxed">
                 Precision ABM targeting for C-suite decision-makers and high-value stakeholders.
               </p>
             </div>
@@ -433,6 +435,7 @@ export default function AdvertisingPrograms() {
 
       {/* Final CTA Banner */}
       <section className="py-20 px-6 sm:px-8 bg-primary text-on-primary w-full relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-secondary/15 blur-[100px] rounded-full" />
         <div className="max-w-7xl mx-auto text-center space-y-6 relative z-10">
           <h2 className="font-headline-lg text-white">Ready to Scale Your Program?</h2>
           <p className="max-w-2xl mx-auto text-white/80 leading-relaxed text-sm">

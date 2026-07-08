@@ -1,12 +1,19 @@
+import { useState, useEffect } from "react";
 import { insights } from "../data";
 import { Container, Reveal } from "../components/ui";
-import { navigate } from "../router";
-import { Calendar, Clock, User } from "lucide-react";
+import { Calendar, Clock, User, X } from "lucide-react";
 
 export default function Insights() {
-  const go = (slug) => {
-    navigate("insight", slug);
-  };
+  const [selectedArticle, setSelectedArticle] = useState(null);
+
+  useEffect(() => {
+    if (selectedArticle) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [selectedArticle]);
 
   return (
     <div className="bg-background text-on-surface min-h-screen">
@@ -27,7 +34,7 @@ export default function Insights() {
           {insights.map((article, idx) => (
             <Reveal key={article.id} delay={idx * 0.1}>
               <div 
-                onClick={() => go(article.slug)}
+                onClick={() => setSelectedArticle(article)}
                 className="glass-card rounded-[2px] overflow-hidden border border-outline-variant hover:border-secondary transition-all cursor-pointer group flex flex-col h-full"
               >
                 <div className="aspect-[16/9] overflow-hidden bg-slate-200">
@@ -58,6 +65,49 @@ export default function Insights() {
           ))}
         </div>
       </section>
+
+      {/* Article Modal */}
+      {selectedArticle && (
+        <div 
+          className="fixed inset-0 z-50 flex items-start justify-center p-4 pt-16 overflow-y-auto"
+          onClick={() => setSelectedArticle(null)}
+        >
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" />
+          <div 
+            className="relative bg-white rounded-[2px] max-w-3xl w-full shadow-2xl overflow-hidden z-10"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="sticky top-0 bg-white border-b border-outline-variant/30 flex items-center justify-between px-8 py-4 z-10">
+              <span className="px-3 py-1 bg-secondary/10 text-secondary font-bold text-xs uppercase tracking-wider rounded-[2px]">{selectedArticle.tag}</span>
+              <button 
+                onClick={() => setSelectedArticle(null)}
+                className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-slate-100 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="px-8 py-6 space-y-6">
+              <h2 className="font-display-xl text-2xl sm:text-3xl text-primary leading-tight font-extrabold">{selectedArticle.title}</h2>
+
+              <div className="flex flex-wrap gap-6 text-sm text-on-surface-variant border-y border-outline-variant/30 py-4">
+                <span className="flex items-center gap-2"><User className="w-4 h-4 text-secondary" /> By {selectedArticle.author}</span>
+                <span className="flex items-center gap-2"><Calendar className="w-4 h-4" /> {new Date(selectedArticle.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</span>
+                <span className="flex items-center gap-2"><Clock className="w-4 h-4" /> {selectedArticle.readTime} min read</span>
+              </div>
+
+              <div className="aspect-[16/9] rounded-[2px] overflow-hidden bg-slate-100 border border-outline-variant/20">
+                <img className="w-full h-full object-cover" alt={selectedArticle.title} src={selectedArticle.image} />
+              </div>
+
+              <article className="text-on-surface-variant leading-relaxed text-base space-y-6">
+                <p className="font-semibold text-primary text-lg">{selectedArticle.excerpt}</p>
+                <p>{selectedArticle.content}</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
