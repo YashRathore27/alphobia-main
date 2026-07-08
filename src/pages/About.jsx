@@ -14,9 +14,9 @@ const timeline = [
 ];
 
 const team = [
-  { name: "Ava Lindqvist", role: "Co-founder & CEO", bio: "Ex-growth executive at two B2B tech unicorns. Oversees global consultancy operations from London.", img: "https://i.pravatar.cc/300?u=ava-lindqvist" },
-  { name: "Marcus Chen", role: "Co-founder & CTO", bio: "Attribution architecture lead. Built our unified performance analytics engine.", img: "https://i.pravatar.cc/300?u=marcus-chen" },
-  { name: "Priya Sharma", role: "VP, Growth Services", bio: "Tactical operations lead for Paid Media & SEO. 12+ years of enterprise scaling experience.", img: "https://i.pravatar.cc/300?u=priya-sharma" }
+  { name: "Ava Lindqvist", role: "Co-founder & CEO", bio: "Ex-growth executive at two B2B tech unicorns. Oversees global consultancy operations from London.", img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&h=750&q=80" },
+  { name: "Marcus Chen", role: "Co-founder & CTO", bio: "Attribution architecture lead. Built our unified performance analytics engine.", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&h=750&q=80" },
+  { name: "Elina Goodwin", role: "VP, Growth Services", bio: "Tactical operations lead for Paid Media & SEO. 12+ years of enterprise scaling experience.", img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&h=750&q=80" }
 ];
 
 export default function About() {
@@ -28,7 +28,7 @@ export default function About() {
           Who We Are
         </span>
         <h1 className="font-display-xl text-primary leading-tight">
-          We're the Trust Layer for <br/><span className="text-secondary">Smarter B2B Growth</span>
+          We're the Trust Layer for <br /><span className="text-secondary">Smarter B2B Growth</span>
         </h1>
         <p className="font-body-lg text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
           Combining analytical precision with digital agility to deploy high-performance marketing ecosystems that compound value month over month.
@@ -41,7 +41,7 @@ export default function About() {
           {values.map((v, i) => (
             <Reveal key={v.title} delay={i * 0.1}>
               <div className="glass-card p-8 rounded-[2px] h-full space-y-4">
-                <span className="w-10 h-10 bg-secondary/15 text-secondary flex items-center justify-center rounded-[2px] font-bold">0{i+1}</span>
+                <span className="w-10 h-10 bg-secondary/15 text-secondary flex items-center justify-center rounded-[2px] font-bold">0{i + 1}</span>
                 <h3 className="font-bold text-xl text-primary">{v.title}</h3>
                 <p className="text-on-surface-variant text-sm leading-relaxed">{v.text}</p>
               </div>
@@ -65,7 +65,7 @@ export default function About() {
               <div key={idx} className="relative pl-8 md:pl-12 group">
                 {/* Dot */}
                 <div className="absolute -left-[9px] top-1.5 w-4 h-4 rounded-[2px] bg-white border-2 border-secondary group-hover:bg-secondary transition-colors" />
-                
+
                 <div className="space-y-2">
                   <span className="text-xs font-bold text-secondary">{item.year}</span>
                   <h3 className="font-bold text-lg text-primary">{item.title}</h3>
@@ -88,13 +88,13 @@ export default function About() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {team.map((t, idx) => (
-            <div key={idx} className="glass-card p-8 rounded-[2px] hover:border-secondary transition-all text-center space-y-4 group">
-              <img src={t.img} alt={t.name} className="w-24 h-24 rounded-[2px] object-cover mx-auto group-hover:scale-105 transition-transform duration-300" />
-              <div className="space-y-1">
-                <h4 className="font-bold text-lg text-primary">{t.name}</h4>
-                <p className="text-xs font-bold text-secondary uppercase tracking-widest">{t.role}</p>
+            <div key={idx} className="group relative rounded-[2px] overflow-hidden bg-white shadow-lg border border-outline-variant/20">
+              <img src={t.img} alt={t.name} className="w-full aspect-[3/4] object-cover transition-transform duration-500 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                <h4 className="font-bold text-lg text-white">{t.name}</h4>
+                <p className="text-xs font-bold text-secondary uppercase tracking-widest mt-1">{t.role}</p>
+                <p className="text-white/70 text-xs leading-relaxed mt-2">{t.bio}</p>
               </div>
-              <p className="text-on-surface-variant text-xs leading-relaxed">{t.bio}</p>
             </div>
           ))}
         </div>
