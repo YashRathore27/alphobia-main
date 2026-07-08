@@ -106,6 +106,19 @@ function ShaderBackground({ canvasId }) {
   return <canvas ref={canvasRef} id={canvasId} className="absolute inset-0 w-full h-full object-cover" />;
 }
 
+const COMPANIES = [
+  { id: "amazon", name: "Amazon", domain: "amazon.com" },
+  { id: "shopify", name: "Shopify", domain: "shopify.com" },
+  { id: "adobe", name: "Adobe", domain: "adobe.com" },
+  { id: "canva", name: "Canva", domain: "canva.com" },
+  { id: "hostinger", name: "Hostinger", domain: "hostinger.com" },
+  { id: "google", name: "Google", domain: "google.com" },
+  { id: "microsoft", name: "Microsoft", domain: "microsoft.com" },
+  { id: "hubspot", name: "HubSpot", domain: "hubspot.com" },
+  { id: "meta", name: "Meta", domain: "meta.com" },
+  { id: "semrush", name: "Semrush", domain: "semrush.com" },
+];
+
 export default function Home() {
   const go = (r) => {
     navigate(r);
@@ -187,19 +200,25 @@ export default function Home() {
       </div>
 
       {/* Trusted By logo cloud */}
-      <section className="py-16 border-y border-outline-variant/20 bg-white/40 backdrop-blur-md z-10 relative">
-        <Container className="text-center">
-          <p className="font-label-sm text-label-sm uppercase tracking-widest text-outline mb-10">
-            Pioneering the future with global industry leaders
-          </p>
-          <div className="flex flex-wrap justify-center items-center gap-16 md:gap-24 opacity-60 font-black text-2xl tracking-tighter">
-            <span className="hover:opacity-100 transition-opacity cursor-pointer">TECHCORP</span>
-            <span className="hover:opacity-100 transition-opacity cursor-pointer">VIVID_MEDIA</span>
-            <span className="hover:opacity-100 transition-opacity cursor-pointer">FIN_STRAT</span>
-            <span className="hover:opacity-100 transition-opacity cursor-pointer">GLOBAL_LOGI</span>
-            <span className="hover:opacity-100 transition-opacity cursor-pointer">AERO_SYS</span>
-          </div>
+      <section className="py-10 border-y border-outline-variant/20 z-10 relative overflow-hidden" aria-label="Trusted companies">
+        <Container>
+          <p className="mb-7 text-center text-xs font-semibold uppercase tracking-[0.2em] text-outline">{`Pioneering the future with global industry leaders`}</p>
         </Container>
+        <div className="relative overflow-hidden" style={{ maskImage: "linear-gradient(90deg, transparent, black 12%, black 88%, transparent)", WebkitMaskImage: "linear-gradient(90deg, transparent, black 12%, black 88%, transparent)" }}>
+          <div className="flex w-max animate-marquee items-center gap-14 px-7 opacity-60 font-bold tracking-tighter">
+            {[...COMPANIES, ...COMPANIES].map((c, i) => (
+              <span key={`${c.id}-${i}`} className="flex items-center gap-3 text-lg font-bold text-slate-700 hover:text-slate-950 transition-colors cursor-pointer">
+                <img 
+                  src={`https://www.google.com/s2/favicons?domain=${c.domain}&sz=64`} 
+                  alt={`${c.name} logo`} 
+                  loading="lazy" 
+                  className="h-7 w-7 rounded-md object-contain" 
+                />
+                {c.name}
+              </span>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* Services Bento Grid */}
