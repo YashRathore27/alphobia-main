@@ -2,11 +2,14 @@ import { useState } from "react";
 import { Container, Button, CountUpStat, Reveal } from "../components/ui";
 import { ChevronDown, ArrowRight } from "lucide-react";
 import { navigate } from "../router";
+import { useAppData } from "../context/DataContext";
 
 export default function DigitalMarketing() {
+  const { servicesData } = useAppData();
+  const svc = servicesData.find((s) => s.id === "digital-marketing") || servicesData[0] || {};
   const [openFaq, setOpenFaq] = useState(null);
 
-  const faqs = [
+  const faqs = svc.faqs || [
     { q: "How quickly can we expect to see ROI?", a: "While SEO efforts take 3-6 months for full maturation, our paid media strategies typically yield measurable attribution and ROI within the first 30 days of campaign launch." },
     { q: "Do you handle international marketing?", a: "Yes, Alphobia operates globally. We have specialized localization teams that manage multi-currency and multi-language campaigns across 12+ primary markets." },
     { q: "What platforms do you specialize in?", a: "Our core focus is on high-intent platforms: Google Search, LinkedIn Ads for B2B, Meta for high-scale B2C, and TikTok for Gen-Z reach, backed by Klaviyo for email automation." }
@@ -17,11 +20,11 @@ export default function DigitalMarketing() {
       {/* Hero Section */}
       <div className="relative w-full overflow-hidden border-b border-outline-variant/10">
         <div className="absolute inset-0 pointer-events-none z-0">
-          <img
-            src="/digital-marketing-hero.png"
-            alt="Digital Marketing Hero Background"
-            className="w-full h-full object-cover opacity-90"
-          />
+            <img
+                src={svc.heroImage || "/digital-marketing-hero.png"}
+                alt="Digital Marketing Hero Background"
+                className="w-full h-full object-cover opacity-90"
+            />
           <div className="hero-image-blur-overlay" />
         </div>
 
@@ -46,21 +49,17 @@ export default function DigitalMarketing() {
 
             <Reveal delay={0.2} className="relative flex justify-center lg:justify-end self-end">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 relative z-20 w-full max-w-lg">
-                <div className="bg-white/80 backdrop-blur-md p-6 rounded-[2px] border border-outline-variant/30 shadow-lg text-center">
-                  <div className="font-label-sm text-on-surface-variant mb-1 font-bold uppercase tracking-wider">ROAS</div>
-                  <div className="font-headline-md text-secondary">4.2x</div>
-                  <p className="text-[10px] text-on-surface-variant mt-1">Campaign Blended</p>
-                </div>
-                <div className="bg-white/80 backdrop-blur-md p-6 rounded-[2px] border border-outline-variant/30 shadow-lg text-center">
-                  <div className="font-label-sm text-on-surface-variant mb-1 font-bold uppercase tracking-wider">CTR</div>
-                  <div className="font-headline-md text-primary">3.8%</div>
-                  <p className="text-[10px] text-on-surface-variant mt-1">Average Click Rate</p>
-                </div>
-                <div className="bg-white/80 backdrop-blur-md p-6 rounded-[2px] border border-outline-variant/30 shadow-lg text-center">
-                  <div className="font-label-sm text-on-surface-variant mb-1 font-bold uppercase tracking-wider">CPA</div>
-                  <div className="font-headline-md text-primary">-$12</div>
-                  <p className="text-[10px] text-on-surface-variant mt-1">Target Reduction</p>
-                </div>
+                {(svc.metrics || [
+                  { label: "ROAS", value: "4.2x", detail: "Campaign Blended" },
+                  { label: "CTR", value: "3.8%", detail: "Average Click Rate" },
+                  { label: "CPA", value: "-$12", detail: "Target Reduction" },
+                ]).slice(0, 3).map((m, i) => (
+                  <div key={i} className="bg-white/80 backdrop-blur-md p-6 rounded-[2px] border border-outline-variant/30 shadow-lg text-center">
+                    <div className="font-label-sm text-on-surface-variant mb-1 font-bold uppercase tracking-wider">{m.label}</div>
+                    <div className="font-headline-md text-secondary">{m.value}</div>
+                    <p className="text-[10px] text-on-surface-variant mt-1">{m.detail}</p>
+                  </div>
+                ))}
               </div>
             </Reveal>
           </div>
@@ -78,85 +77,28 @@ export default function DigitalMarketing() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-white p-8 rounded-[2px] border border-outline-variant/30 hover:shadow-xl hover:translate-y-[-4px] transition-all duration-300 group">
-              <div className="w-14 h-14 bg-secondary-container/10 flex items-center justify-center rounded-[2px] mb-6 group-hover:bg-secondary group-hover:text-white transition-colors">
-                <span className="material-symbols-outlined text-3xl">search_insights</span>
+            {(svc.capabilities || [
+              { name: "SEO Architecture", desc: "Technical optimization and authoritative content structures designed for search dominance.", bullets: ["Core Web Vitals Optimization", "Semantic Content Strategy"] },
+              { name: "Social Precision", desc: "High-performance paid social campaigns and organic brand building that converts.", bullets: ["Audience Segmentation", "Viral Content Frameworks"] },
+              { name: "Editorial Edge", desc: "Strategic storytelling that establishes industry authority and nurtures pipeline growth.", bullets: ["B2B Thought Leadership", "Video Sales Letters (VSL)"] },
+              { name: "Email Lifecycle", desc: "Automated nurture sequences that maximize LTV and reduce customer acquisition costs.", bullets: ["Behavior-Triggered Flows", "AI-Personalized Messaging"] },
+            ]).map((cap, idx) => (
+              <div key={idx} className="bg-white p-8 rounded-[2px] border border-outline-variant/30 hover:shadow-xl hover:translate-y-[-4px] transition-all duration-300 group">
+                <div className="w-14 h-14 bg-secondary-container/10 flex items-center justify-center rounded-[2px] mb-6 group-hover:bg-secondary group-hover:text-white transition-colors">
+                  <span className="material-symbols-outlined text-3xl">{[ "search_insights", "share_reviews", "auto_stories", "alternate_email" ][idx] || "search_insights"}</span>
+                </div>
+                <h3 className="font-headline-md text-primary mb-3">{cap.name}</h3>
+                <p className="text-on-surface-variant font-body-md leading-relaxed mb-6">{cap.desc}</p>
+                <ul className="space-y-2 font-label-sm font-semibold text-on-surface">
+                  {(cap.bullets || []).map((b, bi) => (
+                    <li key={bi} className="flex items-center gap-2">
+                      <span className="material-symbols-outlined text-secondary text-sm">check_circle</span>
+                      {b}
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <h3 className="font-headline-md text-primary mb-3">SEO Architecture</h3>
-              <p className="text-on-surface-variant font-body-md leading-relaxed mb-6">
-                Technical optimization and authoritative content structures designed for search dominance.
-              </p>
-              <ul className="space-y-2 font-label-sm font-semibold text-on-surface">
-                <li className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-secondary text-sm">check_circle</span>
-                  Core Web Vitals Optimization
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-secondary text-sm">check_circle</span>
-                  Semantic Content Strategy
-                </li>
-              </ul>
-            </div>
-
-            <div className="bg-white p-8 rounded-[2px] border border-outline-variant/30 hover:shadow-xl hover:translate-y-[-4px] transition-all duration-300 group">
-              <div className="w-14 h-14 bg-secondary-container/10 flex items-center justify-center rounded-[2px] mb-6 group-hover:bg-secondary group-hover:text-white transition-colors">
-                <span className="material-symbols-outlined text-3xl">share_reviews</span>
-              </div>
-              <h3 className="font-headline-md text-primary mb-3">Social Precision</h3>
-              <p className="text-on-surface-variant font-body-md leading-relaxed mb-6">
-                High-performance paid social campaigns and organic brand building that converts.
-              </p>
-              <ul className="space-y-2 font-label-sm font-semibold text-on-surface">
-                <li className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-secondary text-sm">check_circle</span>
-                  Audience Segmentation
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-secondary text-sm">check_circle</span>
-                  Viral Content Frameworks
-                </li>
-              </ul>
-            </div>
-
-            <div className="bg-white p-8 rounded-[2px] border border-outline-variant/30 hover:shadow-xl hover:translate-y-[-4px] transition-all duration-300 group">
-              <div className="w-14 h-14 bg-secondary-container/10 flex items-center justify-center rounded-[2px] mb-6 group-hover:bg-secondary group-hover:text-white transition-colors">
-                <span className="material-symbols-outlined text-3xl">auto_stories</span>
-              </div>
-              <h3 className="font-headline-md text-primary mb-3">Editorial Edge</h3>
-              <p className="text-on-surface-variant font-body-md leading-relaxed mb-6">
-                Strategic storytelling that establishes industry authority and nurtures pipeline growth.
-              </p>
-              <ul className="space-y-2 font-label-sm font-semibold text-on-surface">
-                <li className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-secondary text-sm">check_circle</span>
-                  B2B Thought Leadership
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-secondary text-sm">check_circle</span>
-                  Video Sales Letters (VSL)
-                </li>
-              </ul>
-            </div>
-
-            <div className="bg-white p-8 rounded-[2px] border border-outline-variant/30 hover:shadow-xl hover:translate-y-[-4px] transition-all duration-300 group">
-              <div className="w-14 h-14 bg-secondary-container/10 flex items-center justify-center rounded-[2px] mb-6 group-hover:bg-secondary group-hover:text-white transition-colors">
-                <span className="material-symbols-outlined text-3xl">alternate_email</span>
-              </div>
-              <h3 className="font-headline-md text-primary mb-3">Email Lifecycle</h3>
-              <p className="text-on-surface-variant font-body-md leading-relaxed mb-6">
-                Automated nurture sequences that maximize LTV and reduce customer acquisition costs.
-              </p>
-              <ul className="space-y-2 font-label-sm font-semibold text-on-surface">
-                <li className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-secondary text-sm">check_circle</span>
-                  Behavior-Triggered Flows
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-secondary text-sm">check_circle</span>
-                  AI-Personalized Messaging
-                </li>
-              </ul>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -165,29 +107,21 @@ export default function DigitalMarketing() {
       <section className="py-24 px-6 sm:px-8 max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row gap-16 items-center">
           <div className="w-full lg:w-1/2 space-y-8">
-            <h2 className="font-headline-lg text-primary">The Kinetic Growth Framework</h2>
+            <h2 className="font-headline-lg text-primary">{svc.framework?.title || "The Kinetic Growth Framework"}</h2>
             <div className="space-y-8">
-              <div className="flex gap-6">
-                <div className="flex-shrink-0 w-12 h-12 rounded-[2px] bg-primary text-on-primary flex items-center justify-center font-bold">01</div>
-                <div>
-                  <h4 className="font-headline-md text-primary mb-1">Audit &amp; Infrastructure</h4>
-                  <p className="text-on-surface-variant font-body-md leading-relaxed">We dismantle your current funnel to identify friction points and deploy advanced tracking pixels for data integrity.</p>
+              {(svc.framework?.steps || [
+                { num: "01", name: "Audit & Infrastructure", desc: "We dismantle your current funnel to identify friction points and deploy advanced tracking pixels for data integrity." },
+                { num: "02", name: "Omnichannel Testing", desc: "Rapid A/B testing across creative, messaging, and platforms to find the highest-ROI entry points." },
+                { num: "03", name: "Aggressive Scaling", desc: "Capital deployment into winning variants, utilizing algorithm-friendly bidding strategies for global reach." },
+              ]).map((step, idx) => (
+                <div key={idx} className="flex gap-6">
+                  <div className="flex-shrink-0 w-12 h-12 rounded-[2px] bg-primary text-on-primary flex items-center justify-center font-bold">{step.num}</div>
+                  <div>
+                    <h4 className="font-headline-md text-primary mb-1">{step.name}</h4>
+                    <p className="text-on-surface-variant font-body-md leading-relaxed">{step.desc}</p>
+                  </div>
                 </div>
-              </div>
-              <div className="flex gap-6">
-                <div className="flex-shrink-0 w-12 h-12 rounded-[2px] bg-primary text-on-primary flex items-center justify-center font-bold">02</div>
-                <div>
-                  <h4 className="font-headline-md text-primary mb-1">Omnichannel Testing</h4>
-                  <p className="text-on-surface-variant font-body-md leading-relaxed">Rapid A/B testing across creative, messaging, and platforms to find the highest-ROI entry points.</p>
-                </div>
-              </div>
-              <div className="flex gap-6">
-                <div className="flex-shrink-0 w-12 h-12 rounded-[2px] bg-primary text-on-primary flex items-center justify-center font-bold">03</div>
-                <div>
-                  <h4 className="font-headline-md text-primary mb-1">Aggressive Scaling</h4>
-                  <p className="text-on-surface-variant font-body-md leading-relaxed">Capital deployment into winning variants, utilizing algorithm-friendly bidding strategies for global reach.</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
@@ -197,7 +131,7 @@ export default function DigitalMarketing() {
               <img
                 className="w-full h-full object-cover p-8"
                 alt="Growth framework illustration"
-                src="https://images.pexels.com/photos/577210/pexels-photo-577210.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=500"
+                src={svc.framework?.image || "https://images.pexels.com/photos/577210/pexels-photo-577210.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=500"}
                 loading="lazy"
               />
             </div>
@@ -211,41 +145,23 @@ export default function DigitalMarketing() {
         <div className="max-w-7xl mx-auto relative z-10">
           <h2 className="font-headline-lg text-white mb-16 text-center">Metrics That Matter</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="border border-white/10 p-10 rounded-[2px] hover:bg-white/5 transition-colors group">
-              <div className="flex justify-between items-start mb-6">
-                <span className="material-symbols-outlined text-secondary text-4xl">payments</span>
-                <div className="bg-green-500/20 text-green-400 px-3 py-1 rounded-[2px] text-xs font-bold">+28% YoY</div>
+            {(svc.successMetrics || [
+              { icon: "payments", tag: "+28% YoY", title: "Average CAC reduction", value: "$42.50", width: "66%" },
+              { icon: "trending_up", tag: "Record High", title: "Customer LTV Growth", value: "320%", width: "75%" },
+              { icon: "visibility", tag: "Viral Reach", title: "Brand Awareness Score", value: "9.2/10", width: "50%" },
+            ]).slice(0, 3).map((m, idx) => (
+              <div key={idx} className="border border-white/10 p-10 rounded-[2px] hover:bg-white/5 transition-colors group">
+                <div className="flex justify-between items-start mb-6">
+                  <span className="material-symbols-outlined text-secondary text-4xl">{m.icon || "payments"}</span>
+                  <div className="bg-green-500/20 text-green-400 px-3 py-1 rounded-[2px] text-xs font-bold">{m.tag}</div>
+                </div>
+                <div className="text-white/60 font-label-sm font-bold uppercase mb-2">{m.title}</div>
+                <div className="font-headline-lg font-bold text-white mb-4">{m.value}</div>
+                <div className="h-1 w-full bg-white/10 rounded-[2px] overflow-hidden">
+                  <div className="h-full bg-secondary transition-all duration-1000 group-hover:w-full" style={{ width: m.width || "50%" }}></div>
+                </div>
               </div>
-              <div className="text-white/60 font-label-sm font-bold uppercase mb-2">Average CAC reduction</div>
-              <div className="font-headline-lg font-bold text-white mb-4">$42.50</div>
-              <div className="h-1 w-full bg-white/10 rounded-[2px] overflow-hidden">
-                <div className="h-full bg-secondary w-2/3 group-hover:w-full transition-all duration-1000"></div>
-              </div>
-            </div>
-
-            <div className="border border-white/10 p-10 rounded-[2px] hover:bg-white/5 transition-colors group">
-              <div className="flex justify-between items-start mb-6">
-                <span className="material-symbols-outlined text-secondary text-4xl">trending_up</span>
-                <div className="bg-blue-500/20 text-blue-400 px-3 py-1 rounded-[2px] text-xs font-bold">Record High</div>
-              </div>
-              <div className="text-white/60 font-label-sm font-bold uppercase mb-2">Customer LTV Growth</div>
-              <div className="font-headline-lg font-bold text-white mb-4">320%</div>
-              <div className="h-1 w-full bg-white/10 rounded-[2px] overflow-hidden">
-                <div className="h-full bg-secondary w-3/4 group-hover:w-full transition-all duration-1000"></div>
-              </div>
-            </div>
-
-            <div className="border border-white/10 p-10 rounded-[2px] hover:bg-white/5 transition-colors group">
-              <div className="flex justify-between items-start mb-6">
-                <span className="material-symbols-outlined text-secondary text-4xl">visibility</span>
-                <div className="bg-purple-500/20 text-purple-400 px-3 py-1 rounded-[2px] text-xs font-bold">Viral Reach</div>
-              </div>
-              <div className="text-white/60 font-label-sm font-bold uppercase mb-2">Brand Awareness Score</div>
-              <div className="font-headline-lg font-bold text-white mb-4">9.2/10</div>
-              <div className="h-1 w-full bg-white/10 rounded-[2px] overflow-hidden">
-                <div className="h-full bg-secondary w-1/2 group-hover:w-full transition-all duration-1000"></div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -263,31 +179,19 @@ export default function DigitalMarketing() {
               </tr>
             </thead>
             <tbody className="font-body-md">
-              <tr className="border-b border-outline-variant/30">
-                <td className="py-6 px-4 font-bold text-primary">SEO Optimization</td>
-                <td className="py-6 px-4 text-on-surface-variant">Standard On-Page</td>
-                <td className="py-6 px-4 text-secondary font-bold">Advanced Semantic Architecture</td>
-              </tr>
-              <tr className="border-b border-outline-variant/30">
-                <td className="py-6 px-4 font-bold text-primary">Ad Spend Management</td>
-                <td className="py-6 px-4 text-on-surface-variant">Up to $50k/mo</td>
-                <td className="py-6 px-4 text-secondary font-bold">Unlimited Scaling</td>
-              </tr>
-              <tr className="border-b border-outline-variant/30">
-                <td className="py-6 px-4 font-bold text-primary">Creative Development</td>
-                <td className="py-6 px-4 text-on-surface-variant">Template-Based</td>
-                <td className="py-6 px-4 text-secondary font-bold">Custom Motion &amp; 3D Assets</td>
-              </tr>
-              <tr className="border-b border-outline-variant/30">
-                <td className="py-6 px-4 font-bold text-primary">Reporting Frequency</td>
-                <td className="py-6 px-4 text-on-surface-variant">Monthly</td>
-                <td className="py-6 px-4 text-secondary font-bold">Real-time Live Dashboard</td>
-              </tr>
-              <tr className="border-b border-outline-variant/30">
-                <td className="py-6 px-4 font-bold text-primary">Dedicated Growth Officer</td>
-                <td className="py-6 px-4 text-on-surface-variant">—</td>
-                <td className="py-6 px-4 text-secondary font-bold">Included (24/7 Access)</td>
-              </tr>
+              {(svc.comparisonTable || [
+                { capability: "SEO Optimization", standard: "Standard On-Page", kinetic: "Advanced Semantic Architecture" },
+                { capability: "Ad Spend Management", standard: "Up to $50k/mo", kinetic: "Unlimited Scaling" },
+                { capability: "Creative Development", standard: "Template-Based", kinetic: "Custom Motion & 3D Assets" },
+                { capability: "Reporting Frequency", standard: "Monthly", kinetic: "Real-time Live Dashboard" },
+                { capability: "Dedicated Growth Officer", standard: "\u2014", kinetic: "Included (24/7 Access)" },
+              ]).map((row, idx) => (
+                <tr key={idx} className="border-b border-outline-variant/30">
+                  <td className="py-6 px-4 font-bold text-primary">{row.capability}</td>
+                  <td className="py-6 px-4 text-on-surface-variant">{row.standard}</td>
+                  <td className="py-6 px-4 text-secondary font-bold">{row.kinetic}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

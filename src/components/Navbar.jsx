@@ -63,7 +63,7 @@ function Navbar() {
               onMouseLeave={() => setServicesOpen(false)}
             >
               <button 
-                className={`flex items-center gap-1 rounded-xl px-3 py-2 font-body-md font-medium transition-colors cursor-pointer ${
+                className={`flex items-center gap-1 rounded-[2px] px-3 py-2 font-body-md font-medium transition-colors cursor-pointer ${
                   isServicesActive 
                     ? "bg-blue-50 text-blue-600" 
                     : "text-slate-600 hover:bg-blue-50 hover:text-blue-600"
@@ -74,10 +74,10 @@ function Navbar() {
 
               {/* Dropdown Menu */}
               {servicesOpen && (
-                <div className="absolute top-full left-0 mt-1 w-64 bg-white border border-slate-200 rounded-xl shadow-xl p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                <div className="absolute top-full left-0 mt-1 w-64 bg-white border border-slate-200 rounded-[2px] shadow-xl p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
                   <button
                     onClick={() => go("digital-marketing")}
-                    className="flex w-full text-left rounded-lg px-4 py-3 font-body-md text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors cursor-pointer"
+                    className="flex w-full text-left rounded-[2px] px-4 py-3 font-body-md text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors cursor-pointer"
                   >
                     <div>
                       <p className="font-semibold">Digital Marketing</p>
@@ -86,7 +86,7 @@ function Navbar() {
                   </button>
                   <button
                     onClick={() => go("affiliate-marketing")}
-                    className="flex w-full text-left rounded-lg px-4 py-3 font-body-md text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors cursor-pointer"
+                    className="flex w-full text-left rounded-[2px] px-4 py-3 font-body-md text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors cursor-pointer"
                   >
                     <div>
                       <p className="font-semibold">Affiliate Marketing</p>
@@ -95,7 +95,7 @@ function Navbar() {
                   </button>
                   <button
                     onClick={() => go("advertising-programs")}
-                    className="flex w-full text-left rounded-lg px-4 py-3 font-body-md text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors cursor-pointer"
+                    className="flex w-full text-left rounded-[2px] px-4 py-3 font-body-md text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors cursor-pointer"
                   >
                     <div>
                       <p className="font-semibold">Advertising Programs</p>
@@ -110,7 +110,7 @@ function Navbar() {
               <button
                 key={l.label}
                 onClick={() => go(l.route)}
-                className={`flex items-center gap-1 rounded-xl px-3 py-2 font-body-md font-medium transition-colors cursor-pointer ${
+                className={`flex items-center gap-1 rounded-[2px] px-3 py-2 font-body-md font-medium transition-colors cursor-pointer ${
                   route === l.route 
                     ? "bg-blue-50 text-blue-600" 
                     : "text-slate-600 hover:bg-blue-50 hover:text-blue-600"
@@ -131,11 +131,11 @@ function Navbar() {
                 type="text"
                 placeholder="Search insights..."
                 onKeyDown={(e) => e.key === "Enter" && go("insights")}
-                className="h-11 w-full rounded-xl border border-slate-200 bg-slate-50 pl-4 pr-11 text-slate-700 outline-none transition-all placeholder:text-slate-400 focus:border-blue-300 focus:bg-white focus:ring-4 focus:ring-blue-100"
+                className="h-11 w-full rounded-[2px] border border-slate-200 bg-slate-50 pl-4 pr-11 text-slate-700 outline-none transition-all placeholder:text-slate-400 focus:border-blue-300 focus:bg-white focus:ring-4 focus:ring-blue-100"
               />
               <button 
                 onClick={() => go("insights")}
-                className="absolute right-1.5 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 text-white transition-transform hover:scale-105 cursor-pointer"
+                className="absolute right-1.5 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-[2px] bg-gradient-to-r from-blue-600 to-blue-500 text-white transition-transform hover:scale-105 cursor-pointer"
               >
                 <Search className="h-4 w-4" />
               </button>
@@ -144,7 +144,7 @@ function Navbar() {
 
           <button 
             onClick={() => go("contact")}
-            className="hidden lg:block bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 font-semibold font-body-md transition-all active:scale-[0.98] rounded-xl cursor-pointer"
+            className="hidden lg:block bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 font-semibold font-body-md transition-all active:scale-[0.98] rounded-[2px] cursor-pointer"
           >
             Book a Strategy Call
           </button>
@@ -162,23 +162,23 @@ function Navbar() {
 
       {/* Mobile Menu Drawer */}
       {open && (
-        <div className="lg:hidden border-t border-slate-200 bg-white/95 backdrop-blur-xl px-6 py-4 absolute w-full left-0 top-full shadow-lg rounded-b-xl z-50 flex flex-col gap-3">
+        <div className="lg:hidden border-t border-slate-200 bg-white/95 backdrop-blur-xl px-6 py-4 absolute w-full left-0 top-full shadow-lg rounded-b-[2px] z-50 flex flex-col gap-3">
           <p className="font-label-sm font-semibold text-slate-400 uppercase tracking-wider mb-1">Services</p>
           <button 
             onClick={() => go("digital-marketing")}
-            className="flex items-center justify-between text-left rounded-xl px-4 py-2 hover:bg-blue-50 hover:text-blue-600 text-slate-700 font-semibold cursor-pointer"
+            className="flex items-center justify-between text-left rounded-[2px] px-4 py-2 hover:bg-blue-50 hover:text-blue-600 text-slate-700 font-semibold cursor-pointer"
           >
             Digital Marketing
           </button>
           <button 
             onClick={() => go("affiliate-marketing")}
-            className="flex items-center justify-between text-left rounded-xl px-4 py-2 hover:bg-blue-50 hover:text-blue-600 text-slate-700 font-semibold cursor-pointer"
+            className="flex items-center justify-between text-left rounded-[2px] px-4 py-2 hover:bg-blue-50 hover:text-blue-600 text-slate-700 font-semibold cursor-pointer"
           >
             Affiliate Marketing
           </button>
           <button 
             onClick={() => go("advertising-programs")}
-            className="flex items-center justify-between text-left rounded-xl px-4 py-2 hover:bg-blue-50 hover:text-blue-600 text-slate-700 font-semibold cursor-pointer"
+            className="flex items-center justify-between text-left rounded-[2px] px-4 py-2 hover:bg-blue-50 hover:text-blue-600 text-slate-700 font-semibold cursor-pointer"
           >
             Advertising Programs
           </button>
@@ -189,7 +189,7 @@ function Navbar() {
             <button
               key={l.label}
               onClick={() => go(l.route)}
-              className={`flex items-center justify-between text-left rounded-xl px-4 py-3 text-slate-700 font-semibold cursor-pointer ${
+              className={`flex items-center justify-between text-left rounded-[2px] px-4 py-3 text-slate-700 font-semibold cursor-pointer ${
                 route === l.route ? "bg-blue-50 text-blue-600" : "hover:bg-blue-50 hover:text-blue-600"
               }`}
             >
@@ -199,7 +199,7 @@ function Navbar() {
           
           <button 
             onClick={() => go("contact")}
-            className="w-full bg-blue-600 text-white py-3 font-bold hover:bg-blue-700 transition-all active:scale-[0.98] rounded-xl mt-2 text-center cursor-pointer"
+            className="w-full bg-blue-600 text-white py-3 font-bold hover:bg-blue-700 transition-all active:scale-[0.98] rounded-[2px] mt-2 text-center cursor-pointer"
           >
             Book a Strategy Call
           </button>

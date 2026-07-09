@@ -1,37 +1,28 @@
 import { Container, Reveal } from "../components/ui";
-
-const values = [
-  { title: "Our Mission", text: "Empower global enterprise brands to capture the future of their markets through precision B2B performance marketing and unified data attribution." },
-  { title: "Our Vision", text: "To define the definitive standard in global B2B digital transformation, providing complete metrics transparency and high-stakes growth engineering." },
-  { title: "Our Promise", text: "We never guess, we model. We distribute resources based on proven metrics and absolute client transparency, aligning incentives for win-win results." }
-];
-
-const timeline = [
-  { year: "2019", title: "Founding in London", text: "Alphobia begins as a small boutique consultancy of three growth engineers specializing in programmatic marketing." },
-  { year: "2021", title: "Attribution Dashboard Launch", text: "We release our custom performance attribution framework, aggregating multi-channel insights for client-side scaling." },
-  { year: "2024", title: "Global Expansion", text: "Opening tactical offices in New York and Singapore to support B2B clients across four continents, surpassing $50M managed ad spend." },
-  { year: "2026", title: "Kinetic Network Integration", text: "Expanding publisher networks to 12.4k+ verified partners and setting industry-leading benchmarks for B2B ROAS." }
-];
-
-const team = [
-  { name: "Ava Lindqvist", role: "Co-founder & CEO", bio: "Ex-growth executive at two B2B tech unicorns. Oversees global consultancy operations from London.", img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&h=750&q=80" },
-  { name: "Marcus Chen", role: "Co-founder & CTO", bio: "Attribution architecture lead. Built our unified performance analytics engine.", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&h=750&q=80" },
-  { name: "Elina Goodwin", role: "VP, Growth Services", bio: "Tactical operations lead for Paid Media & SEO. 12+ years of enterprise scaling experience.", img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&h=750&q=80" }
-];
+import { useAppData } from "../context/DataContext";
 
 export default function About() {
+  const { aboutData, team } = useAppData();
+
+  const header = aboutData.header;
+  const values = aboutData.values || [];
+  const timelineHeader = aboutData.timelineHeader;
+  const timeline = aboutData.timeline || [];
+  const teamHeader = aboutData.teamHeader;
+
   return (
     <div className="bg-background text-on-surface min-h-screen">
       {/* Page Header */}
       <section className="pt-32 pb-20 px-6 sm:px-8 max-w-7xl mx-auto text-center space-y-4">
         <span className="inline-block py-1 px-4 rounded-[2px] bg-secondary/10 text-secondary font-label-sm uppercase tracking-widest">
-          Who We Are
+          {header.badge || "Who We Are"}
         </span>
         <h1 className="font-display-xl text-primary leading-tight">
-          We're the Trust Layer for <br /><span className="text-secondary">Smarter B2B Growth</span>
+          {header.titleBefore || "We're the Trust Layer for"} <br />
+          <span className="text-secondary">{header.titleAccent || "Smarter B2B Growth"}</span>
         </h1>
         <p className="font-body-lg text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
-          Combining analytical precision with digital agility to deploy high-performance marketing ecosystems that compound value month over month.
+          {header.subtitle || "Combining analytical precision with digital agility to deploy high-performance marketing ecosystems that compound value month over month."}
         </p>
       </section>
 
@@ -39,7 +30,7 @@ export default function About() {
       <section className="py-16 px-6 sm:px-8 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {values.map((v, i) => (
-            <Reveal key={v.title} delay={i * 0.1}>
+            <Reveal key={v.title || i} delay={i * 0.1}>
               <div className="glass-card p-8 rounded-[2px] h-full space-y-4">
                 <span className="w-10 h-10 bg-secondary/15 text-secondary flex items-center justify-center rounded-[2px] font-bold">0{i + 1}</span>
                 <h3 className="font-headline-md text-primary">{v.title}</h3>
@@ -54,9 +45,9 @@ export default function About() {
       <section className="bg-surface-container-low py-24 px-6 sm:px-8">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16 space-y-4">
-            <h2 className="font-headline-lg text-primary">From Consultancy to Global Powerhouse</h2>
+            <h2 className="font-headline-lg text-primary">{timelineHeader.title || "From Consultancy to Global Powerhouse"}</h2>
             <p className="text-on-surface-variant font-body-lg max-w-lg mx-auto">
-              Our milestone journey engineering digital velocity.
+              {timelineHeader.subtitle || "Our milestone journey engineering digital velocity."}
             </p>
           </div>
 
@@ -80,15 +71,15 @@ export default function About() {
       {/* Team grid */}
       <section className="py-24 px-6 sm:px-8 max-w-7xl mx-auto">
         <div className="text-center mb-16 space-y-4">
-          <h2 className="font-headline-lg text-primary">Our Leadership Team</h2>
+          <h2 className="font-headline-lg text-primary">{teamHeader.title || "Our Leadership Team"}</h2>
           <p className="text-on-surface-variant font-body-lg max-w-lg mx-auto">
-            Growth consultants and technical engineers aligning values with campaign performance.
+            {teamHeader.subtitle || "Growth consultants and technical engineers aligning values with campaign performance."}
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {team.map((t, idx) => (
-            <div key={idx} className="group relative rounded-[2px] overflow-hidden bg-white shadow-lg border border-outline-variant/20">
+            <div key={t.id || idx} className="group relative rounded-[2px] overflow-hidden bg-white shadow-lg border border-outline-variant/20">
               <img src={t.img} alt={t.name} loading="lazy" className="w-full aspect-[3/4] object-cover transition-transform duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                 <h4 className="font-headline-md text-white">{t.name}</h4>

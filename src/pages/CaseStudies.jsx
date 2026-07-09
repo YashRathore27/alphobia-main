@@ -1,8 +1,9 @@
-import { caseStudies } from "../data";
 import { Container, Button, Reveal } from "../components/ui";
 import { navigate } from "../router";
+import { useAppData } from "../context/DataContext";
 
 export default function CaseStudies() {
+  const { caseStudies } = useAppData();
   const go = (slug) => {
     navigate("insights"); // Redirect to insights or keep it simple
   };

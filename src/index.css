@@ -80,7 +80,7 @@
   --shadow-btn-primary: 0 8px 24px rgba(37, 99, 235, 0.2);
 
   --radius-card: 4px;
-  --radius-btn: 12px;
+  --radius-btn: 2px;
   --radius-input: 10px;
 }
 
@@ -503,10 +503,10 @@ h3 span.text-secondary,
   inset: 0;
   background: linear-gradient(
     90deg,
-    rgba(0, 0, 0, 0.65) 0%,
-    rgba(0, 0, 0, 0.45) 25%,
-    rgba(0, 0, 0, 0.2) 50%,
-    rgba(0, 0, 0, 0.08) 70%,
+    rgba(255, 255, 255, 0.85) 0%,
+    rgba(255, 255, 255, 0.65) 25%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0.15) 70%,
     transparent 90%
   );
   z-index: 1;
@@ -516,13 +516,12 @@ h3 span.text-secondary,
 .hero-image-blur-overlay {
   position: absolute;
   inset: 0;
-  backdrop-filter: blur(8px);
   background: linear-gradient(
     90deg,
-    rgba(0, 0, 0, 0.35) 0%,
-    rgba(0, 0, 0, 0.2) 30%,
-    rgba(0, 0, 0, 0.08) 55%,
-    transparent 80%
+    rgba(255, 255, 255, 0.85) 0%,
+    rgba(255, 255, 255, 0.7) 35%,
+    rgba(255, 255, 255, 0.3) 65%,
+    transparent 90%
   );
   z-index: 1;
   pointer-events: none;
@@ -533,7 +532,7 @@ h3 span.text-secondary,
   .hero-image-blur-overlay {
     background: linear-gradient(
       90deg,
-      rgba(0, 0, 0, 0.5) 0%,
+      rgba(255, 255, 255, 0.8) 0%,
       transparent 60%
     );
   }

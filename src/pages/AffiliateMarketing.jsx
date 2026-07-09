@@ -2,8 +2,11 @@ import { useState } from "react";
 import { Container, Button, CountUpStat, Reveal } from "../components/ui";
 import { ArrowRight } from "lucide-react";
 import { navigate } from "../router";
+import { useAppData } from "../context/DataContext";
 
 export default function AffiliateMarketing() {
+  const { servicesData } = useAppData();
+  const svc = servicesData.find((s) => s.id === "affiliate-marketing") || servicesData[2] || {};
   const [revenue, setRevenue] = useState(500000);
   const [partners, setPartners] = useState(250);
 
@@ -25,11 +28,11 @@ export default function AffiliateMarketing() {
       {/* Hero Section */}
       <div className="relative w-full overflow-hidden border-b border-outline-variant/10">
         <div className="absolute inset-0 pointer-events-none z-0">
-          <img
-            src="/affiliated-marketing-hero.png"
-            alt="Affiliate Marketing Hero Background"
-            className="w-full h-full object-cover opacity-90"
-          />
+            <img
+                src={svc.heroImage || "/affiliated-marketing-hero.png"}
+                alt="Affiliate Marketing Hero Background"
+                className="w-full h-full object-cover opacity-90"
+            />
           <div className="hero-image-blur-overlay" />
         </div>
 
@@ -53,12 +56,12 @@ export default function AffiliateMarketing() {
 
             <Reveal delay={0.2} className="relative flex justify-center lg:justify-end self-end">
               <div className="bg-white/80 backdrop-blur-md p-8 border border-outline-variant/30 shadow-lg rounded-[2px] min-w-[240px]">
-                <p className="font-label-sm font-bold text-secondary uppercase tracking-widest">ACTIVE PARTNERS</p>
-                <p className="text-4xl font-extrabold text-primary mt-2">12.4k+</p>
+                <p className="font-label-sm font-bold text-secondary uppercase tracking-widest">{svc.metrics?.[1]?.label || "ACTIVE PARTNERS"}</p>
+                <p className="text-4xl font-extrabold text-primary mt-2">{svc.metrics?.[1]?.value || "12.4k+"}</p>
                 <div className="mt-4 w-full bg-slate-200 h-1.5 overflow-hidden rounded-full">
                   <div className="bg-secondary h-full w-[85%] rounded-full"></div>
                 </div>
-                <p className="text-[10px] text-on-surface-variant mt-2">Global publisher footprint</p>
+                <p className="text-[10px] text-on-surface-variant mt-2">{svc.metrics?.[1]?.detail || "Global publisher footprint"}</p>
               </div>
             </Reveal>
           </div>
@@ -81,38 +84,20 @@ export default function AffiliateMarketing() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="group/card glass-card p-8 rounded-[2px] hover:-translate-y-2 transition-all duration-300 border-b-4 border-b-secondary">
-              <div className="mb-6 flex items-center justify-between">
-                <span className="material-symbols-outlined text-secondary text-4xl">strategy</span>
-                <span className="text-outline group-hover/card:text-secondary text-4xl font-bold opacity-10 group-hover/card:opacity-100 transition-all duration-300">01</span>
+            {(svc.capabilities || [
+              { name: "Strategic Mapping", desc: "Alignment of your product categories with high-authority vertical leaders and niche experts." },
+              { name: "Quality Vetting", desc: "Multi-layered compliance checks to ensure traffic quality, brand safety, and ethical standard adherence." },
+              { name: "Lifecycle Management", desc: "Ongoing optimization, incentive scaling, and dedicated account support for top-tier performers." },
+            ]).slice(0, 3).map((cap, idx) => (
+              <div key={idx} className="group/card glass-card p-8 rounded-[2px] hover:-translate-y-2 transition-all duration-300 border-b-4 border-b-secondary">
+                <div className="mb-6 flex items-center justify-between">
+                  <span className="material-symbols-outlined text-secondary text-4xl">{["strategy", "verified_user", "handshake"][idx]}</span>
+                  <span className="text-outline group-hover/card:text-secondary text-4xl font-bold opacity-10 group-hover/card:opacity-100 transition-all duration-300">0{idx + 1}</span>
+                </div>
+                <h3 className="font-headline-md text-primary mb-3">{cap.name}</h3>
+                <p className="text-on-surface-variant font-body-md leading-relaxed">{cap.desc}</p>
               </div>
-              <h3 className="font-headline-md text-primary mb-3">Strategic Mapping</h3>
-              <p className="text-on-surface-variant font-body-md leading-relaxed">
-                Alignment of your product categories with high-authority vertical leaders and niche experts.
-              </p>
-            </div>
-
-            <div className="group/card glass-card p-8 rounded-[2px] hover:-translate-y-2 transition-all duration-300 border-b-4 border-b-primary">
-              <div className="mb-6 flex items-center justify-between">
-                <span className="material-symbols-outlined text-secondary text-4xl">verified_user</span>
-                <span className="text-outline group-hover/card:text-secondary text-4xl font-bold opacity-10 group-hover/card:opacity-100 transition-all duration-300">02</span>
-              </div>
-              <h3 className="font-headline-md text-primary mb-3">Quality Vetting</h3>
-              <p className="text-on-surface-variant font-body-md leading-relaxed">
-                Multi-layered compliance checks to ensure traffic quality, brand safety, and ethical standard adherence.
-              </p>
-            </div>
-
-            <div className="group/card glass-card p-8 rounded-[2px] hover:-translate-y-2 transition-all duration-300 border-b-4 border-b-secondary">
-              <div className="mb-6 flex items-center justify-between">
-                <span className="material-symbols-outlined text-secondary text-4xl">handshake</span>
-                <span className="text-outline group-hover/card:text-secondary text-4xl font-bold opacity-10 group-hover/card:opacity-100 transition-all duration-300">03</span>
-              </div>
-              <h3 className="font-headline-md text-primary mb-3">Lifecycle Management</h3>
-              <p className="text-on-surface-variant font-body-md leading-relaxed">
-                Ongoing optimization, incentive scaling, and dedicated account support for top-tier performers.
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>

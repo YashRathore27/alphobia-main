@@ -1,6 +1,6 @@
-import { industries } from "../data";
 import { Container, Reveal } from "../components/ui";
 import { Cloud, Wallet, ShoppingBag, Truck } from "lucide-react";
+import { useAppData } from "../context/DataContext";
 
 const icons = {
   cloud: Cloud,
@@ -10,6 +10,7 @@ const icons = {
 };
 
 export default function Industries() {
+  const { industries } = useAppData();
   return (
     <div className="bg-background text-on-surface min-h-screen">
       <section className="pt-32 pb-20 px-6 sm:px-8 max-w-7xl mx-auto text-center space-y-4">

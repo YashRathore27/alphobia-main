@@ -34,7 +34,7 @@ export function Button({ as, to, variant = "primary", size = "md", className, ch
     <Comp
       onClick={handleClick}
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-all duration-300 active:scale-[0.97] disabled:opacity-50 cursor-pointer",
+        "inline-flex items-center justify-center gap-2 rounded-[2px] font-semibold transition-all duration-300 active:scale-[0.97] disabled:opacity-50 cursor-pointer",
         btnVariants[variant], btnSizes[size], className
       )}
       {...props}

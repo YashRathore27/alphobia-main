@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { Container, Button, Reveal } from "../components/ui";
-import { Mail, Phone, MapPin, Clock, Send, ChevronDown } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, Send, ChevronDown, Loader2 } from "lucide-react";
+import { db } from "../firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", company: "", subject: "Free Marketing Audit", message: "" });
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
 
   const update = (key) => (e) => setForm({ ...form, [key]: e.target.value });
@@ -97,9 +100,30 @@ export default function Contact() {
             ) : (
               <form 
                 className="space-y-6"
-                onSubmit={(e) => {
+                onSubmit={async (e) => {
                   e.preventDefault();
-                  if (form.name && form.email) setSent(true);
+                  if (!form.name || !form.email) return;
+                  setSubmitting(true);
+                  try {
+                    await addDoc(
+                      collection(db, "projects", "alphobia", "contactSubmissions"),
+                      {
+                        name: form.name,
+                        email: form.email,
+                        company: form.company || "",
+                        subject: form.subject,
+                        message: form.message || "",
+                        status: "new",
+                        submittedAt: serverTimestamp(),
+                      }
+                    );
+                    setSent(true);
+                  } catch (err) {
+                    console.error("Failed to save contact submission:", err);
+                    alert("Something went wrong. Please try again.");
+                  } finally {
+                    setSubmitting(false);
+                  }
                 }}
               >
                 <h2 className="font-headline-md text-primary flex items-center gap-2">
@@ -165,9 +189,14 @@ export default function Contact() {
                 </div>
                 <button 
                   type="submit" 
-                  className="w-full bg-secondary text-white py-4 font-bold rounded-[2px] hover:bg-secondary/90 transition-all active:scale-[0.98] flex items-center justify-center gap-2"
+                  disabled={submitting}
+                  className="w-full bg-secondary text-white py-4 font-bold rounded-[2px] hover:bg-secondary/90 transition-all active:scale-[0.98] flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  Submit Request <Send className="w-4 h-4" />
+                  {submitting ? (
+                    <><Loader2 className="w-4 h-4 animate-spin" /> Sending...</>
+                  ) : (
+                    <>Submit Request <Send className="w-4 h-4" /></>
+                  )}
                 </button>
               </form>
             )}

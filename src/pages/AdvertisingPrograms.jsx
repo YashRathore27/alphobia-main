@@ -1,7 +1,8 @@
 import { useEffect, useRef } from "react";
 import { Container, Button, Reveal } from "../components/ui";
 import { navigate } from "../router";
-import { TrendingUp, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { useAppData } from "../context/DataContext";
 
 // Webgl flow shader for page header
 function ShaderHeader({ canvasId }) {
@@ -103,6 +104,8 @@ function ShaderHeader({ canvasId }) {
 }
 
 export default function AdvertisingPrograms() {
+  const { servicesData } = useAppData();
+  const svc = servicesData.find((s) => s.id === "advertising-programs") || servicesData[2] || {};
   const go = (r) => {
     navigate(r);
   };
@@ -113,11 +116,11 @@ export default function AdvertisingPrograms() {
       <section className="relative min-h-[500px] flex items-center overflow-hidden pt-28 pb-10">
         {/* Image Background */}
         <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
-          <img
-            src="/advertisment-marketing-hero.png"
-            alt="Advertising Hero Background"
-            className="w-full h-full object-cover opacity-90"
-          />
+            <img
+                src={svc.heroImage || "/advertisment-marketing-hero.png"}
+                alt="Advertising Hero Background"
+                className="w-full h-full object-cover opacity-90"
+            />
           <div className="hero-image-blur-overlay" />
         </div>
 
@@ -144,16 +147,16 @@ export default function AdvertisingPrograms() {
 
             <Reveal delay={0.2} className="relative flex justify-center lg:justify-end self-end">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 relative z-20 w-full max-w-md">
-                <div className="bg-white/80 backdrop-blur-md p-6 rounded-[2px] border border-outline-variant/30 shadow-lg text-center">
-                  <div className="font-label-sm text-on-surface-variant mb-1 font-bold uppercase tracking-wider">AD SPEND REACH</div>
-                  <div className="font-headline-md text-secondary">$45M+</div>
-                  <p className="text-[10px] text-on-surface-variant mt-1">Managed Annually</p>
-                </div>
-                <div className="bg-white/80 backdrop-blur-md p-6 rounded-[2px] border border-outline-variant/30 shadow-lg text-center">
-                  <div className="font-label-sm text-on-surface-variant mb-1 font-bold uppercase tracking-wider">AVERAGE ROAS</div>
-                  <div className="font-headline-md text-primary">5.8x</div>
-                  <p className="text-[10px] text-on-surface-variant mt-1">Blended Client Return</p>
-                </div>
+                {(svc.metrics || [
+                  { label: "Blended ROAS", value: "5.8x", detail: "Campaign Blended" },
+                  { label: "Managed Spend", value: "$50M+", detail: "Optimized Ad Spend" },
+                ]).slice(0, 2).map((m, i) => (
+                  <div key={i} className="bg-white/80 backdrop-blur-md p-6 rounded-[2px] border border-outline-variant/30 shadow-lg text-center">
+                    <div className="font-label-sm text-on-surface-variant mb-1 font-bold uppercase tracking-wider">{m.label}</div>
+                    <div className="font-headline-md text-secondary">{m.value}</div>
+                    <p className="text-[10px] text-on-surface-variant mt-1">{m.detail}</p>
+                  </div>
+                ))}
               </div>
             </Reveal>
           </div>
@@ -175,15 +178,15 @@ export default function AdvertisingPrograms() {
             <div className="relative z-10 space-y-6">
               <div className="flex items-center gap-4">
                 <span className="material-symbols-outlined text-4xl text-secondary">ads_click</span>
-                <h3 className="font-headline-md text-primary">Google Search &amp; Display</h3>
+                <h3 className="font-headline-md text-primary">{svc.capabilities?.[0]?.name || "Google Search & Display"}</h3>
               </div>
               <p className="text-on-surface-variant font-body-md leading-relaxed max-w-md">
-                Capture high-intent prospects at the exact moment of search. Our proprietary alpha-beta account structures maximize ROI through granular keyword segmentation.
+                {svc.capabilities?.[0]?.desc || "Capture high-intent prospects at the exact moment of search. Our proprietary alpha-beta account structures maximize ROI through granular keyword segmentation."}
               </p>
               <ul className="space-y-3 font-label-sm font-semibold text-on-surface">
-                <li className="flex items-center gap-3"><span className="material-symbols-outlined text-secondary text-sm">check_circle</span> Hyper-local intent targeting</li>
-                <li className="flex items-center gap-3"><span className="material-symbols-outlined text-secondary text-sm">check_circle</span> Dynamic search ads (DSA) optimization</li>
-                <li className="flex items-center gap-3"><span className="material-symbols-outlined text-secondary text-sm">check_circle</span> Automated bidding scripts</li>
+                {(svc.capabilities?.[0]?.bullets || ["Hyper-local intent targeting", "Dynamic search ads (DSA) optimization", "Automated bidding scripts"]).map((b, i) => (
+                  <li key={i} className="flex items-center gap-3"><span className="material-symbols-outlined text-secondary text-sm">check_circle</span> {b}</li>
+                ))}
               </ul>
             </div>
             <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-secondary/5 rounded-[2px] blur-3xl group-hover:bg-secondary/10 transition-all pointer-events-none"></div>
@@ -195,10 +198,10 @@ export default function AdvertisingPrograms() {
             <div className="space-y-6">
               <div className="flex items-center gap-4">
                 <span className="material-symbols-outlined text-4xl text-white">corporate_fare</span>
-                <h3 className="font-headline-md text-white">LinkedIn B2B</h3>
+                <h3 className="font-headline-md text-white">{svc.capabilities?.[1]?.name || "LinkedIn B2B"}</h3>
               </div>
               <p className="text-white/80 font-body-md leading-relaxed">
-                Precision ABM targeting for C-suite decision-makers and high-value stakeholders.
+                {svc.capabilities?.[1]?.desc || "Precision ABM targeting for C-suite decision-makers and high-value stakeholders."}
               </p>
             </div>
             <div className="space-y-3 mt-8">
@@ -217,15 +220,15 @@ export default function AdvertisingPrograms() {
             <div className="space-y-6">
               <div className="flex items-center gap-4">
                 <span className="material-symbols-outlined text-4xl text-secondary">hub</span>
-                <h3 className="font-headline-md text-primary">Meta Ecosystem</h3>
+                <h3 className="font-headline-md text-primary">{svc.capabilities?.[2]?.name || "Meta Ecosystem"}</h3>
               </div>
               <p className="text-on-surface-variant font-body-md leading-relaxed">
-                Full-funnel social commerce utilizing Facebook and Instagram's sophisticated interest graphs.
+                {svc.capabilities?.[2]?.desc || "Full-funnel social commerce utilizing Facebook and Instagram's sophisticated interest graphs."}
               </p>
               <div className="flex flex-wrap gap-2 pt-2">
-                <span className="px-3 py-1.5 bg-white border border-outline-variant rounded-[2px] text-[10px] font-bold text-primary">Retargeting</span>
-                <span className="px-3 py-1.5 bg-white border border-outline-variant rounded-[2px] text-[10px] font-bold text-primary">Lookalike</span>
-                <span className="px-3 py-1.5 bg-white border border-outline-variant rounded-[2px] text-[10px] font-bold text-primary">UGC Creative</span>
+                {(svc.capabilities?.[2]?.bullets || ["Retargeting", "Lookalike", "UGC Creative"]).map((b, i) => (
+                  <span key={i} className="px-3 py-1.5 bg-white border border-outline-variant rounded-[2px] text-[10px] font-bold text-primary">{b}</span>
+                ))}
               </div>
             </div>
           </div>
@@ -235,10 +238,10 @@ export default function AdvertisingPrograms() {
             <div className="space-y-6">
               <div className="flex items-center gap-4">
                 <span className="material-symbols-outlined text-4xl text-secondary">memory</span>
-                <h3 className="font-headline-md text-primary">Programmatic RTB</h3>
+                <h3 className="font-headline-md text-primary">{svc.capabilities?.[3]?.name || "Programmatic RTB"}</h3>
               </div>
               <p className="text-on-surface-variant font-body-md leading-relaxed max-w-sm">
-                Real-time bidding across premium publishers, connected TV (CTV), and digital out-of-home (DOOH).
+                {svc.capabilities?.[3]?.desc || "Real-time bidding across premium publishers, connected TV (CTV), and digital out-of-home (DOOH)."}
               </p>
             </div>
             <div className="hidden lg:grid grid-cols-2 gap-2 w-32 shrink-0">
@@ -255,7 +258,7 @@ export default function AdvertisingPrograms() {
       <section className="bg-primary-container py-24 px-6 sm:px-8">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-8">
-            <h2 className="font-headline-lg text-white">Unified Performance Intelligence</h2>
+            <h2 className="font-headline-lg text-primary">Unified Performance Intelligence</h2>
               <p className="text-on-primary-container font-body-lg">
               Stop oscillating between platforms. Our proprietary dashboard aggregates multi-channel data into a single source of truth for cross-attribution analysis.
             </p>
@@ -265,16 +268,16 @@ export default function AdvertisingPrograms() {
                   <span className="material-symbols-outlined text-on-secondary">query_stats</span>
                 </div>
                 <div>
-                  <h4 className="text-white font-bold mb-1">Real-Time Attribution</h4>
+                  <h4 className="text-primary font-bold mb-1">Real-Time Attribution</h4>
                   <p className="text-on-primary-container font-body-md">First-touch and last-touch modeling to understand the true impact of every dollar spent.</p>
                 </div>
               </div>
               <div className="flex gap-4">
-                <div className="w-12 h-12 rounded-[2px] bg-white/10 flex items-center justify-center shrink-0">
-                  <span className="material-symbols-outlined text-on-primary">psychology</span>
+                <div className="w-12 h-12 rounded-[2px] bg-secondary flex items-center justify-center shrink-0">
+                  <span className="material-symbols-outlined text-on-secondary">psychology</span>
                 </div>
                 <div>
-                  <h4 className="text-white font-bold mb-1">AI-Driven Anomaly Detection</h4>
+                  <h4 className="text-primary font-bold mb-1">AI-Driven Anomaly Detection</h4>
                   <p className="text-on-primary-container font-body-md">Automated alerts for CPA fluctuations or budget pacing issues across all accounts.</p>
                 </div>
               </div>

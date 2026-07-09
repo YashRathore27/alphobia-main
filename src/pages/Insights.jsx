@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { insights } from "../data";
 import { Container, Reveal } from "../components/ui";
 import { Calendar, Clock, User, X } from "lucide-react";
+import { useAppData } from "../context/DataContext";
 
 export default function Insights() {
+  const { insights } = useAppData();
   const [selectedArticle, setSelectedArticle] = useState(null);
 
   useEffect(() => {

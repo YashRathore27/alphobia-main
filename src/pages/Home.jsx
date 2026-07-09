@@ -4,6 +4,7 @@ import { Container, Button, CountUpStat, Reveal } from "../components/ui";
 import { CTASection } from "../components/CTASection";
 import { TrendingUp, ArrowRight, CheckCircle2 } from "lucide-react";
 import OrbitHeroAnimation from "../components/OrbitHeroAnimation";
+import { useAppData } from "../context/DataContext";
 
 
 
@@ -135,21 +136,17 @@ function ShaderBackground({ canvasId }) {
   return <canvas ref={canvasRef} id={canvasId} className="absolute inset-0 w-full h-full object-cover" />;
 }
 
-const COMPANIES = [
-  { id: "amazon", name: "Amazon", domain: "amazon.com" },
-  { id: "shopify", name: "Shopify", domain: "shopify.com" },
-  { id: "adobe", name: "Adobe", domain: "adobe.com" },
-  { id: "canva", name: "Canva", domain: "canva.com" },
-  { id: "hostinger", name: "Hostinger", domain: "hostinger.com" },
-  { id: "google", name: "Google", domain: "google.com" },
-  { id: "microsoft", name: "Microsoft", domain: "microsoft.com" },
-  { id: "hubspot", name: "HubSpot", domain: "hubspot.com" },
-  { id: "meta", name: "Meta", domain: "meta.com" },
-  { id: "semrush", name: "Semrush", domain: "semrush.com" },
-];
-
 export default function Home() {
+  const { homeData } = useAppData();
   const [activeStep, setActiveStep] = useState(0);
+
+  const hero = homeData.hero;
+  const trustedBy = homeData.trustedBy;
+  const companies = trustedBy.companies || [];
+  const capabilitiesHeader = homeData.capabilitiesHeader;
+  const executionProtocol = homeData.executionProtocol;
+  const whyChooseUs = homeData.whyChooseUs;
+  const stats = homeData.stats;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -173,7 +170,7 @@ export default function Home() {
       <div className="relative w-full overflow-hidden border-b border-outline-variant/10">
         <div className="absolute inset-0 pointer-events-none z-0">
           <img 
-            src="/HeroImg.jpeg" 
+            src={hero.heroImage || "/HeroImg.jpeg"} 
             alt="Hero Background" 
             className="w-full h-full object-cover opacity-90"
           />
@@ -185,34 +182,36 @@ export default function Home() {
             {/* Left Hero Text */}
             <div className="space-y-8 max-w-2xl">
               <Reveal>
-                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-[2px] bg-surface-container text-secondary font-label-sm uppercase tracking-widest">
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-secondary/10 border border-secondary/20 rounded-[2px] text-secondary font-label-sm uppercase tracking-widest w-fit">
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span>
                   </span>
-                  Global Expansion Leaders
+                  {hero.tag || "Global Expansion Leaders"}
                 </div>
               </Reveal>
 
               <Reveal delay={0.1}>
                 <h1 className="font-display-xl leading-tight text-primary">
-                  Empowering <span className="text-secondary italic">Global</span> Growth Through Data.
+                  {hero.titleBefore || "Empowering"}{" "}
+                  <span className="text-secondary italic">{hero.titleAccent || "Global"}</span>{" "}
+                  {hero.titleAfter || "Growth Through Data."}
                 </h1>
               </Reveal>
 
               <Reveal delay={0.2}>
                 <p className="font-body-lg text-on-surface-variant max-w-xl">
-                  We fuse high-stakes consultancy intelligence with digital agency agility to scale enterprise performance across four continents.
+                  {hero.subtitle || "We fuse high-stakes consultancy intelligence with digital agency agility to scale enterprise performance across four continents."}
                 </p>
               </Reveal>
 
               <Reveal delay={0.3}>
                 <div className="flex flex-wrap gap-4 pt-2">
                   <Button onClick={() => go("contact")} variant="accent" size="lg" className="shadow-xl rounded-[2px]">
-                    Book a Strategy Call
+                    {hero.button1Text || "Book a Strategy Call"}
                   </Button>
                   <Button onClick={() => go("about")} variant="outline" size="lg" className="bg-transparent border border-slate-300 text-slate-800 hover:bg-slate-200/50 transition-all rounded-[2px]">
-                    Our Approach
+                    {hero.button2Text || "Our Approach"}
                   </Button>
                 </div>
               </Reveal>
@@ -221,9 +220,9 @@ export default function Home() {
                 <div className="pt-8 flex items-center gap-8 grayscale">
                   <span className="font-label-sm uppercase tracking-tighter">Verified by</span>
                   <div className="flex gap-6 font-bold font-body-lg">
-                    <span>Google Premier</span>
-                    <span>HubSpot Elite</span>
-                    <span>Meta Business</span>
+                    {(hero.verifiedBy || ["Google Premier", "HubSpot Elite", "Meta Business"]).map((v, i) => (
+                      <span key={i}>{v}</span>
+                    ))}
                   </div>
                 </div>
               </Reveal>
@@ -240,11 +239,13 @@ export default function Home() {
       {/* Trusted By logo cloud */}
       <section className="py-10 z-10 relative overflow-hidden" aria-label="Trusted companies">
         <Container>
-          <p className="mb-7 text-center font-label-sm uppercase tracking-[0.2em] text-outline">{`Pioneering the future with global industry leaders`}</p>
+          <p className="mb-7 text-center font-label-sm uppercase tracking-[0.2em] text-outline">
+            {trustedBy.title || "Pioneering the future with global industry leaders"}
+          </p>
         </Container>
         <div className="relative overflow-hidden" style={{ maskImage: "linear-gradient(90deg, transparent, black 12%, black 88%, transparent)", WebkitMaskImage: "linear-gradient(90deg, transparent, black 12%, black 88%, transparent)" }}>
           <div className="flex w-max animate-marquee items-center gap-14 px-7 opacity-60 font-bold tracking-tighter">
-            {[...COMPANIES, ...COMPANIES].map((c, i) => (
+            {[...companies, ...companies].map((c, i) => (
               <span key={`${c.id}-${i}`} className="flex items-center gap-3 font-body-lg font-bold text-slate-700 hover:text-slate-950 transition-colors cursor-pointer">
                 <CompanyLogo name={c.name} domain={c.domain} />
                 {c.name}
@@ -257,9 +258,9 @@ export default function Home() {
       {/* Services Bento Grid */}
       <section className="py-24 px-6 sm:px-8 max-w-7xl mx-auto z-10 relative">
         <div className="mb-16 space-y-4">
-          <h2 className="font-headline-lg text-primary">Core Capabilities</h2>
+          <h2 className="font-headline-lg text-primary">{capabilitiesHeader.title || "Core Capabilities"}</h2>
           <p className="text-on-surface-variant max-w-2xl">
-            From foundational SEO to high-frequency programmatic advertising, we provide the full spectrum of digital velocity.
+            {capabilitiesHeader.subtitle || "From foundational SEO to high-frequency programmatic advertising, we provide the full spectrum of digital velocity."}
           </p>
         </div>
 
@@ -335,14 +336,15 @@ export default function Home() {
           </div>
         </div>
       </section>
+
       {/* Our Execution Protocol Process Section */}
       <section className="py-24 bg-primary text-on-primary relative overflow-hidden z-10">
         <div className="absolute top-0 right-0 w-96 h-96 bg-secondary/15 blur-[100px] rounded-full" />
         <div className="px-6 sm:px-8 max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-20 max-w-3xl mx-auto space-y-4">
-            <h2 className="font-headline-lg text-white">Our Execution Protocol</h2>
+            <h2 className="font-headline-lg text-white">{executionProtocol.title || "Our Execution Protocol"}</h2>
             <p className="text-white/60 font-body-lg leading-relaxed">
-              A five-stage lifecycle designed for aggressive market capture and sustained ROI.
+              {executionProtocol.subtitle || "A five-stage lifecycle designed for aggressive market capture and sustained ROI."}
             </p>
           </div>
 
@@ -355,14 +357,14 @@ export default function Home() {
               style={{ width: `${(activeStep / 4) * 80}%` }}
             />
 
-            {[
+            {(executionProtocol.steps || [
               { num: "01", name: "Discovery", desc: "Deep-dive audit into current ecosystems and competitor vulnerabilities." },
               { num: "02", name: "Strategy", desc: "Tailored growth roadmap with defined KPIs and channel mix priorities." },
               { num: "03", name: "Execution", desc: "Rapid deployment of high-performance campaign creative assets." },
               { num: "04", name: "Optimization", desc: "Real-time multivariate testing and algorithmic budget reallocation." },
               { num: "05", name: "Growth", desc: "Scaling successful protocols across global consumer territories." }
-            ].map((step, idx) => (
-              <div key={step.num} className="space-y-4 flex flex-col items-center text-center">
+            ]).map((step, idx) => (
+              <div key={step.num || idx} className="space-y-4 flex flex-col items-center text-center">
                 <div 
                   className={`w-20 h-20 rounded-full flex items-center justify-center font-bold text-white backdrop-blur transition-all duration-500 cursor-pointer ${
                     idx <= activeStep 
@@ -388,35 +390,25 @@ export default function Home() {
       {/* Statistics Section */}
       <section className="py-20 px-6 sm:px-8 max-w-7xl mx-auto z-10 relative">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="glass-card p-12 rounded-[2px] text-center space-y-4 hover:shadow-2xl transition-all duration-500 group hover:border-secondary">
+          {(stats || [
+            { label: "Global Impressions", value: 500, suffix: "M+", prefix: "", desc: "Delivered annually across high-intent B2B audience segments." },
+            { label: "Managed Ad Spend", value: 50, suffix: "M+", prefix: "$", desc: "Optimized with machine learning protocols for maximum efficiency." },
+            { label: "Avg Client ROI", value: 300, suffix: "%", prefix: "", desc: "Documented growth across our top-tier enterprise accounts." },
+          ]).slice(0, 3).map((s, idx) => (
+            <div key={idx} className="glass-card p-12 rounded-[2px] text-center space-y-4 hover:shadow-2xl transition-all duration-500 group hover:border-secondary">
               <p className="text-secondary font-display-xl group-hover:scale-105 transition-transform">
-              <CountUpStat value={500} suffix="M+" />
-            </p>
-            <p className="font-headline-md text-primary">Global Impressions</p>
-            <p className="text-on-surface-variant font-body-md leading-relaxed">
-              Delivered annually across high-intent B2B audience segments.
-            </p>
-          </div>
-
-          <div className="glass-card p-12 rounded-[2px] text-center space-y-4 hover:shadow-2xl transition-all duration-500 group hover:border-secondary">
-              <p className="text-secondary font-display-xl group-hover:scale-105 transition-transform">
-              <CountUpStat value={50} prefix="$" suffix="M+" />
-            </p>
-            <p className="font-headline-md text-primary">Managed Ad Spend</p>
-            <p className="text-on-surface-variant font-body-md leading-relaxed">
-              Optimized with machine learning protocols for maximum efficiency.
-            </p>
-          </div>
-
-          <div className="glass-card p-12 rounded-[2px] text-center space-y-4 hover:shadow-2xl transition-all duration-500 group hover:border-secondary">
-              <p className="text-secondary font-display-xl group-hover:scale-105 transition-transform">
-              <CountUpStat value={300} suffix="%" />
-            </p>
-            <p className="font-headline-md text-primary">Avg Client ROI</p>
-            <p className="text-on-surface-variant font-body-md leading-relaxed">
-              Documented growth across our top-tier enterprise accounts.
-            </p>
-          </div>
+                <CountUpStat value={s.value} prefix={s.prefix || ""} suffix={s.suffix || ""} />
+              </p>
+              <p className="font-headline-md text-primary">{s.label}</p>
+              <p className="text-on-surface-variant font-body-md leading-relaxed">
+                {s.desc || (
+                  idx === 0 ? "Delivered annually across high-intent B2B audience segments." :
+                  idx === 1 ? "Optimized with machine learning protocols for maximum efficiency." :
+                  "Documented growth across our top-tier enterprise accounts."
+                )}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -428,24 +420,22 @@ export default function Home() {
             <img 
               className="w-full h-full object-cover rounded-[2px]" 
               alt="Corporate office with analytics charts" 
-              src="https://images.pexels.com/photos/7621381/pexels-photo-7621381.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=600&w=600" 
+              src={whyChooseUs.row1?.img || "https://images.pexels.com/photos/7621381/pexels-photo-7621381.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=600&w=600"} 
               loading="lazy"
             />
           </div>
           <div className="space-y-6">
-            <h3 className="font-headline-lg text-primary">Data-Driven DNA</h3>
+            <h3 className="font-headline-lg text-primary">{whyChooseUs.row1?.title || "Data-Driven DNA"}</h3>
             <p className="font-body-lg text-on-surface-variant leading-relaxed">
-              We don't guess. We model. Our proprietary Kinetic Engine analyzes billions of data points to predict market shifts before they happen, allowing your brand to move faster than the competition.
+              {whyChooseUs.row1?.desc || "We don't guess. We model. Our proprietary Kinetic Engine analyzes billions of data points to predict market shifts before they happen, allowing your brand to move faster than the competition."}
             </p>
             <ul className="space-y-3 font-semibold text-on-surface">
-              <li className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-secondary">check_circle</span>
-                Proprietary AI predictive modeling
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-secondary">check_circle</span>
-                Real-time performance transparency
-              </li>
+              {(whyChooseUs.row1?.bullets || ["Proprietary AI predictive modeling", "Real-time performance transparency"]).map((b, i) => (
+                <li key={i} className="flex items-center gap-3">
+                  <span className="material-symbols-outlined text-secondary">check_circle</span>
+                  {b}
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -456,24 +446,22 @@ export default function Home() {
             <img 
               className="w-full h-full object-cover rounded-[2px]" 
               alt="Digital interface network nodes" 
-              src="https://images.pexels.com/photos/34804001/pexels-photo-34804001.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=600&w=600" 
+              src={whyChooseUs.row2?.img || "https://images.pexels.com/photos/34804001/pexels-photo-34804001.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=600&w=600"} 
               loading="lazy"
             />
           </div>
           <div className="lg:order-1 space-y-6">
-            <h3 className="font-headline-lg text-primary">Certified Global Experts</h3>
+            <h3 className="font-headline-lg text-primary">{whyChooseUs.row2?.title || "Certified Global Experts"}</h3>
             <p className="font-body-lg text-on-surface-variant leading-relaxed">
-              Our team consists of senior-level consultants and tactical specialists located in primary financial hubs. We speak the language of global enterprise and understand regional market nuances.
+              {whyChooseUs.row2?.desc || "Our team consists of senior-level consultants and tactical specialists located in primary financial hubs. We speak the language of global enterprise and understand regional market nuances."}
             </p>
             <ul className="space-y-3 font-semibold text-on-surface">
-              <li className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-secondary">check_circle</span>
-                15+ years average industry experience
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-secondary">check_circle</span>
-                Multilingual campaign management
-              </li>
+              {(whyChooseUs.row2?.bullets || ["15+ years average industry experience", "Multilingual campaign management"]).map((b, i) => (
+                <li key={i} className="flex items-center gap-3">
+                  <span className="material-symbols-outlined text-secondary">check_circle</span>
+                  {b}
+                </li>
+              ))}
             </ul>
           </div>
         </div>

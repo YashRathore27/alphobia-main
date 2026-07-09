@@ -1,9 +1,10 @@
-import { insights } from "../data";
 import { Container, Button } from "../components/ui";
 import { navigate } from "../router";
 import { Calendar, Clock, User, ArrowLeft } from "lucide-react";
+import { useAppData } from "../context/DataContext";
 
 export default function InsightDetail({ id }) {
+  const { insights } = useAppData();
   // Find article by slug (which is passed as 'id' in our hash route structure: #/insight/b2b-seo-attribution-guide)
   const article = insights.find((item) => item.slug === id) || insights[0];
 
