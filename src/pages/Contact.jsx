@@ -1,16 +1,37 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Container, Button, Reveal } from "../components/ui";
 import { Mail, Phone, MapPin, Clock, Send, ChevronDown, Loader2 } from "lucide-react";
-import { db } from "../firebase";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", company: "", subject: "Free Marketing Audit", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", company: "", subject: "Free Marketing Audit", message: "" });
   const [sent, setSent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [errors, setErrors] = useState({});
   const [openFaq, setOpenFaq] = useState(null);
 
-  const update = (key) => (e) => setForm({ ...form, [key]: e.target.value });
+  // Auto-reset the success card after 3 seconds
+  useEffect(() => {
+    if (!sent) return;
+    const timer = setTimeout(() => setSent(false), 3000);
+    return () => clearTimeout(timer);
+  }, [sent]);
+
+  // Validation helpers
+  const validateEmail = (val) => {
+    if (!val) return "Email is required.";
+    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val) ? "" : "Please enter a valid email address.";
+  };
+  const validatePhone = (val) => {
+    if (!val) return "Phone number is required.";
+    return /^\+?[\d\s()\-]{7,20}$/.test(val) ? "" : "Enter a valid phone number (e.g. +1 415 555 0192).";
+  };
+
+  const update = (key) => (e) => {
+    const val = e.target.value;
+    setForm((prev) => ({ ...prev, [key]: val }));
+    if (key === "email") setErrors((prev) => ({ ...prev, email: validateEmail(val) }));
+    if (key === "phone") setErrors((prev) => ({ ...prev, phone: validatePhone(val) }));
+  };
 
   const faqs = [
     { q: "How does the free marketing audit work?", a: "Tell us your website and active marketing goals. Within 5 business days, our team will deliver a 10-page performance teardown covering conversions, tracking setups, and 3 immediate quick wins." },
@@ -93,31 +114,40 @@ export default function Contact() {
                 <p className="text-on-surface-variant font-body-md max-w-sm mx-auto leading-relaxed">
                   Thank you for writing to Alphobia. A certified growth consultant will follow up within 4 hours.
                 </p>
-                <Button onClick={() => setSent(false)} variant="outline" className="mt-4">
-                  Send Another Message
-                </Button>
+                {/* Auto-returns to form in 3 seconds — no button needed */}
+                <p className="text-xs text-on-surface-variant/60">Returning to form shortly…</p>
               </div>
             ) : (
               <form 
                 className="space-y-6"
                 onSubmit={async (e) => {
                   e.preventDefault();
-                  if (!form.name || !form.email) return;
+                  // Run validation before submit
+                  const emailErr = validateEmail(form.email);
+                  const phoneErr = validatePhone(form.phone);
+                  if (emailErr || phoneErr) {
+                    setErrors({ email: emailErr, phone: phoneErr });
+                    return;
+                  }
+                  if (!form.name) return;
                   setSubmitting(true);
                   try {
-                    await addDoc(
-                      collection(db, "projects", "alphobia", "contactSubmissions"),
-                      {
+                    const res = await fetch("/api/contacts", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({
                         name: form.name,
                         email: form.email,
+                        phone: form.phone,
                         company: form.company || "",
                         subject: form.subject,
                         message: form.message || "",
-                        status: "new",
-                        submittedAt: serverTimestamp(),
-                      }
-                    );
+                      }),
+                    });
+                    if (!res.ok) throw new Error("Server error");
                     setSent(true);
+                    setForm({ name: "", email: "", phone: "", company: "", subject: "Free Marketing Audit", message: "" });
+                    setErrors({});
                   } catch (err) {
                     console.error("Failed to save contact submission:", err);
                     alert("Something went wrong. Please try again.");
@@ -146,13 +176,46 @@ export default function Contact() {
                       required 
                       type="email" 
                       value={form.email} 
-                      onChange={update("email")} 
+                      onChange={update("email")}
+                      onBlur={() => setErrors((prev) => ({ ...prev, email: validateEmail(form.email) }))}
                       placeholder="jane@company.com" 
-                      className="w-full h-12 rounded-[2px] border border-outline-variant bg-white px-4 text-on-surface focus:border-secondary focus:ring-2 focus:ring-secondary/10 outline-none"
+                      className={`w-full h-12 rounded-[2px] border bg-white px-4 text-on-surface focus:ring-2 outline-none transition-colors ${
+                        errors.email
+                          ? "border-red-400 focus:border-red-400 focus:ring-red-100"
+                          : "border-outline-variant focus:border-secondary focus:ring-secondary/10"
+                      }`}
                     />
+                    {errors.email && (
+                      <p className="text-xs text-red-500 flex items-center gap-1 mt-1">
+                        <span className="material-symbols-outlined" style={{fontSize:"14px"}}>error</span>
+                        {errors.email}
+                      </p>
+                    )}
                   </div>
                 </div>
                 <div className="grid gap-6 sm:grid-cols-2">
+                  <div className="space-y-2">
+                    <label className="font-label-sm font-bold text-primary uppercase tracking-wider">Phone Number</label>
+                    <input 
+                      required
+                      type="tel"
+                      value={form.phone} 
+                      onChange={update("phone")}
+                      onBlur={() => setErrors((prev) => ({ ...prev, phone: validatePhone(form.phone) }))}
+                      placeholder="+1 415 555 0192" 
+                      className={`w-full h-12 rounded-[2px] border bg-white px-4 text-on-surface focus:ring-2 outline-none transition-colors ${
+                        errors.phone
+                          ? "border-red-400 focus:border-red-400 focus:ring-red-100"
+                          : "border-outline-variant focus:border-secondary focus:ring-secondary/10"
+                      }`}
+                    />
+                    {errors.phone && (
+                      <p className="text-xs text-red-500 flex items-center gap-1 mt-1">
+                        <span className="material-symbols-outlined" style={{fontSize:"14px"}}>error</span>
+                        {errors.phone}
+                      </p>
+                    )}
+                  </div>
                   <div className="space-y-2">
                     <label className="font-label-sm font-bold text-primary uppercase tracking-wider">Company Name</label>
                     <input 
@@ -162,19 +225,19 @@ export default function Contact() {
                       className="w-full h-12 rounded-[2px] border border-outline-variant bg-white px-4 text-on-surface focus:border-secondary focus:ring-2 focus:ring-secondary/10 outline-none"
                     />
                   </div>
-                  <div className="space-y-2">
-                    <label className="font-label-sm font-bold text-primary uppercase tracking-wider">Request Type</label>
-                    <select 
-                      value={form.subject} 
-                      onChange={update("subject")} 
-                      className="w-full h-12 rounded-[2px] border border-outline-variant bg-white px-4 text-on-surface focus:border-secondary outline-none cursor-pointer"
-                    >
-                      <option>Free Marketing Audit</option>
-                      <option>Book a Strategy Call</option>
-                      <option>Advertising Partnerships</option>
-                      <option>General Enquiry</option>
-                    </select>
-                  </div>
+                </div>
+                <div className="space-y-2">
+                  <label className="font-label-sm font-bold text-primary uppercase tracking-wider">Request Type</label>
+                  <select 
+                    value={form.subject} 
+                    onChange={update("subject")} 
+                    className="w-full h-12 rounded-[2px] border border-outline-variant bg-white px-4 text-on-surface focus:border-secondary outline-none cursor-pointer"
+                  >
+                    <option>Free Marketing Audit</option>
+                    <option>Book a Strategy Call</option>
+                    <option>Advertising Partnerships</option>
+                    <option>General Enquiry</option>
+                  </select>
                 </div>
                 <div className="space-y-2">
                   <label className="font-label-sm font-bold text-primary uppercase tracking-wider">How can we help?</label>
